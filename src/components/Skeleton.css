@@ -1,0 +1,23 @@
+.devvy{
+    margin-right: 30px;
+}
+/* Skeleton.css */
+/* Skeleton.css */
+.skeleton-container-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .skeleton-card-admin {
+    width: 95%;
+    max-width: 400px; /* Optional: set a max-width to control the card size */
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+  .skeleton-card2{
+    margin-top: 20px;
+  }
