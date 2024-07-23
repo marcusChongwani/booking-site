@@ -6,19 +6,13 @@ import'./Components.css'
 
 export default function InfinitScroll() {
   return (
-    <div>
-      <div className="logos">
-        <div className="logos-slide">
+    <div className='patners'>
+    <h3>Trusted by</h3>
+    <div className="logos">
             <img src={image1} alt="Cavendish University Logo" />
             <img src={image2} alt="UNZA Logo" />
-            <img src={image3} alt="Unilus Logo" />
-        </div>
-        <div className="logos-slide">
-            <img src={image1} alt="Cavendish University Logo" />
-            <img src={image2} alt="UNZA Logo" />
-            <img src={image3} alt="Unilus Logo" />
-        </div>
       </div>
     </div>
+     
   )
 }

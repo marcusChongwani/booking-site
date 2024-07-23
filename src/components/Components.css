@@ -5,7 +5,17 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 10px;
+    
   }
+    @media (min-width: 750px) {
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 40px;
+        
+      }
+    }
   
   .nav a {
     text-decoration: none;
@@ -111,6 +121,12 @@
         margin-bottom: 10px;
         margin-right: 20px;
     }
+    .patners{
+      padding: 20px 40px;
+    }
+    .logos img{
+      
+    }
       
   }
 
@@ -120,7 +136,7 @@
 /*...............................HOW IT WORKSSSSS CSSS...................*/
 .how-it-works-container {
     text-align: center;
-    padding: 20px;
+    padding: 10px 20px ;
     margin: 0 auto;
 }
 
@@ -172,7 +188,7 @@
     line-height: 1.5;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 750px) {
     .section-title {
         font-size: 1.5rem;
     }
@@ -180,6 +196,7 @@
     .step {
         flex: 1 1 100%;
         margin-bottom: 30px;
+        padding: 20px 40px;
     }
 
     .step-title {
@@ -425,52 +442,27 @@
 
 
 
-
-@keyframes slide {
-  from {
-    transform: translateX(0);
+.logos{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+.logos img {
+ width: 200px;
+ margin: 0;
+}
+@media (min-width: 768px) {
+  .logos{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
   }
-  to {
-    transform: translateX(-100%);
+  .logos img {
+   width: 350px;
+   margin: 0;
   }
-}
-
-.logos {
-  overflow: hidden;
-  padding: 10px 0;
-  white-space: nowrap;
-  position: relative;
-}
-
-.logos:before,
-.logos:after {
-  position: absolute;
-  top: 0;
-  width: 100px; /* Adjust width as needed */
-  height: 100%;
-  content: "";
-  z-index: 2;
-}
-
-.logos:before {
-  left: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
-}
-
-.logos:after {
-  right: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
-}
-
-.logos-slide {
-  display: inline-block;
-  animation: slide 35s infinite linear;
-  white-space: nowrap; /* Ensure inline-block elements stay in a single line */
-}
-
-.logos-slide img {
-  height: 150px;
-  margin: 0 1px;
 }
 
 /*...........skeleton..............*/

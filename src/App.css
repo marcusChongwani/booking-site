@@ -1,5 +1,9 @@
 body {
-  background-color: #fff;
+  background:linear-gradient(to bottom right,
+  #f2f2f2,
+    #ffff,
+    
+  );
   color:#140021;
   font-family: Poppins;
   padding: 0;
@@ -8,48 +12,40 @@ body {
 
 /*Home page styles.........................................home page styles*/
 
-.hero {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)),
-    url("./assets/HeroImage.png") no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  color: white;
-  padding: 30px 20px;
-  text-align: left;
 
-}
 .styled-text {
-  position: relative;
-  font-size: 19px; /* Adjust as needed */
-  font-weight: bold; /* Adjust as needed */
-  
+  text-decoration: underline wavy #4d4d4d;
+  font-size: 23px;
 }
 
-.styled-text::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px; /* Adjust as needed */
-  width: 100%;
-  height: 8px; /* Adjust as needed */
-  background: url('data:image/svg+xml,%3Csvg viewBox="0 0 30 10" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 10 Q5 0 10 10 T20 10 T30 10" stroke="%2300bcd4" fill="transparent" stroke-width="2" /%3E%3C/svg%3E') repeat-x;
+
+.hero{
+  padding: 0 20px;
 }
 .hero h1 {
   font-weight: 700;
   font-size: 35px;
   line-height: 42px;
-  width: 220px;
+  margin: 5px 0 10px;
+}
+.hero-text{
+ margin-right: 10px;
+}
+.hero-text p{
+  margin-bottom: 10px;
+}
+.hero img{
+  width: 100%;
+  margin: 15px 0;
+  border-radius: 10px;
 }
 .hero a {
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  background-color: #ff8c38;
+  background-color: #161616;
   border: none;
   width: 180px;
-  margin-top: 80px;
   padding-block: 0.75rem;
   color: white;
   font-weight: 700;
@@ -60,6 +56,55 @@ body {
 .hero a:hover{
   background-color: #161616;
 }
+@media (min-width: 750px) {
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 40px;
+  }
+  .hero-info {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+  }
+ 
+  .hero h1 {
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 42px;
+   
+  }
+  .hero-text{
+    margin-right: 70px
+  }
+  .hero-text p {
+    margin-bottom: 10px;
+    width: 380px;
+  }
+  .hero-image img {
+    width: 500px;
+    margin: 15px 50px;
+    border-radius: 10px;
+  }
+  .hero a {
+    text-align: center;
+    text-decoration: none;
+    background-color: #161616;
+    border: none;
+    width: 180px;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+  }
+  .hero a:hover {
+    background-color: #161616;
+  }
+}
+
 
 /* Popular Section */
 .popular-section {
@@ -74,43 +119,14 @@ body {
 
 /* Media Queries */
 @media (min-width: 768px) {
-  .hero {
-    text-align: left;
-
-  }
-  .hero h1 {
-    font-size: 48px;
-    width: 40%;
-    text-align: left;
-  }
-  .hero a {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    background-color: #ff8c38;
-    border: none;
-    width: 180px;
-    margin-top: 90px;
-    padding-block: 0.75rem;
-    color: white;
-    font-weight: 700;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.1s ease-in-out;
-  }
   .popular-section {
-    padding: 5px 30px;
+    padding: 20px 40px;
   }
   .popular-section p {
     font-size: 23px;
     font-weight: 400;
   }
-  .styled-text {
-    position: relative;
-    font-size: 23px; /* Adjust as needed */
-    font-weight: bold; /* Adjust as needed */
-    color: #161616; /* Adjust as needed */
-  }
+  
   
 }
 
@@ -892,3 +908,66 @@ option {
   font-weight: 450;
 }
 
+
+
+/**/
+.problem-statement-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  background-color: #fdfdfd;
+}
+
+.video-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+}
+
+.text-container {
+  flex: 1 1 45%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.text-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.text-container p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.text-container h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 650px) {
+  .problem-statement-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      padding: 30px 40px;
+  }
+  .video-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  
+  }
+  .video-container, .text-container {
+     
+  }
+}
