@@ -19,9 +19,7 @@ body {
 }
 
 
-.hero{
-  padding: 0 20px;
-}
+
 .hero h1 {
   font-weight: 700;
   font-size: 35px;
@@ -37,7 +35,7 @@ body {
 .hero img{
   width: 100%;
   margin: 15px 0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .hero a {
   display: inline-block;
@@ -56,19 +54,18 @@ body {
 .hero a:hover{
   background-color: #161616;
 }
-@media (min-width: 750px) {
-  .hero {
+.hero{
+  padding: 10px 20px;
+}
+
+@media (min-width: 900px) {
+  .hero{
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 20px 40px;
+    justify-content: space-between;
+    padding: 10px 80px;
   }
-  .hero-info {
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-  }
+ 
  
   .hero h1 {
     font-weight: 700;
@@ -83,10 +80,14 @@ body {
     margin-bottom: 10px;
     width: 380px;
   }
+  .hero-image{
+    margin: 0;
+    padding: 0;
+  }
   .hero-image img {
-    width: 500px;
-    margin: 15px 50px;
-    border-radius: 10px;
+    width: 450px;
+    border-radius: 5px;
+    margin: 20px 0;
   }
   .hero a {
     text-align: center;
@@ -118,9 +119,9 @@ body {
 }
 
 /* Media Queries */
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .popular-section {
-    padding: 20px 40px;
+    padding: 20px 80px;
   }
   .popular-section p {
     font-size: 23px;
@@ -131,114 +132,273 @@ body {
 }
 
 /*about page styles.........................................about page styles*/
-.about{
-  background:url("./assets/aboutImage.png") no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size:fill;
-  min-height: 160px;
-  padding: 45px 20px;
-  text-align: left;
-  
-
-}
-.info{
+/* General Styles */
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 20px;
 }
-.info h2{
-  padding: 10px 0;
+.info  p{
+  font-weight:500;
 }
-.info p{
-  padding: 10px 0;
+.about-image {
+  width: 500px;
+  max-width: 100%;
+  /* Ensure the image doesn't overflow on smaller screens */
 }
-.about-main{
-  margin: 0px 20px;
-  background-color: #ffcc8d;
-  padding-top: 1px;
-  border-radius: 8px;
-  height: 180px;
+.about-images {
+  display: flex;
 }
-.about-main h2{
-  padding: 10px 20px;
+.about-ps{
+ order: 1;
+ font-weight: 550;
+}
+.info {
+  padding: 10px 70px;
+}
 
+.about-main3 {
+  margin-left: 30px;
+  order: 2;
 }
-.about-main a {
+
+.about-main2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 100px;
+  margin-bottom: 30px;
+}
+
+.info h2 {
+  font-weight: bold;
+  font-size: 40px;
+  padding: 10px 0;
+}
+
+.info p {
+  padding: 10px 0;
+}
+
+.about-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-main h2 {
+  padding: 10px 20px;
+}
+
+.person1 {
+  width: 100px;
+}
+
+.about-link {
   text-align: center;
   text-decoration: none;
   background-color: #161616;
   border: none;
-  width: 180px;
-  padding: 10px 20px;
   color: white;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
   margin-left: 20px;
+  padding: 10px 20px;
 }
 
-.listings-container{
-  padding: 0px 20px;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 20px 10px;
+  }
+  .about-ps{
+    padding: 10px 20px;
+    margin-top: 20px;
+    order: 2;
+  }
+  .about-link {
+    margin-top: 10px;
+    
+  }
+  .about-image{
+    width: 350px;
+    margin-left: 50px;
+  }
+
+  .info {
+    padding: 10px 20px;
+  }
+
+  .about-main2 {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+
+  .about-main3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 0;
+    margin-top: 20px;
+    order: 1;
+  }
+  .about-main{
+    display: flex;
+    flex-direction: column;
+  }
+  .about-link {
+    margin-left: 0;
+    margin-top: 20px;
+
+  }
+
+  .info h2 {
+    font-size: 30px; /* Adjust font size for smaller screens */
+  }
+
+  .person1 {
+    width: 99px; /* Adjust image size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 15px 5px;
+  }
+
+  .info {
+    padding: 10px 15px;
+  }
+
+  .about-main2 {
+    padding: 15px 5px;
+  }
+
+  .about-link{
+   padding: 10px 20px;
+  }
+
+  .info h2 {
+    font-size: 24px; /* Further adjust font size for smaller screens */
+  }
+
+  .person1 {
+    width: 90px; /* Further adjust image size for smaller screens */
+  }
+}
+
+/* Listings styles */
+.listings-container {
+  padding: 0 20px;
   margin-top: 0;
   display: flex;
-  align-items: left;
   flex-direction: column;
+  align-items: flex-start; /* Changed 'left' to 'flex-start' for better alignment */
 }
 
-.filters-container{
+/* Filters container styles */
+.filters-container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   margin-bottom: 10px;
 }
-.clear{
-  color: #4d4d4d;
 
+.clear {
+  color: #4d4d4d;
 }
+
+/* Media queries for larger screens */
+@media (min-width: 900px) {
+  .listings-container {
+    flex-wrap: wrap; /* Allow wrapping if necessary */
+    padding: 0 80px; /* Adjust padding */
+  }
+  .listings-container h2{
+    margin-bottom: 15px;
+  }
+  .filters-container {
+    justify-content: space-between; /* Adjust spacing for larger screens */
+     /* Increase margin if needed */
+  }
+  .fills p{ 
+    margin-right: 20px;
+  }
+  .fills{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}
+
 
 /*Details page styles.........................................Detailsss page styles*/
 
-.details-container{
+.details-container {
   padding: 0 20px;
 }
-.details-container a{
+.mySwiper {
+  width: 100%;
+  height: 300px;
+}
+.images{
+  
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  
+}
+
+.details-container a {
   color: #4d4d4d;
 }
-.details{
+
+.details {
   margin-top: 10px;
 }
-.text-header{
+
+.text-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 10px 0;
 }
-.host-info{
+
+.host-info {
   display: flex;
   align-items: center;
   margin: 10px 0;
 }
-.host-info p{
- margin: 0;
+
+.host-info p {
+  margin: 0;
 }
-.host-image{
+
+.host-image {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 5px;
   object-fit: cover;
 }
-.category{
-  border:none;
+
+.category {
+  border: none;
   background-color: #ffcc8d;
-  padding: 5px ;
+  padding: 5px;
   border-radius: 5px;
   margin-top: 10px;
   color: #4d4d4d;
-  font-family: poppins;
+  font-family: Poppins;
   margin-right: 10px;
 }
-.contactHost{
+
+.contactHost {
   text-decoration: none;
   width: 100%;
   background-color: #ff8c38;
@@ -248,37 +408,98 @@ body {
   font-size: 18px;
   margin-top: 10px;
   font-weight: bold;
-  color:#fff7ed;
+  color: #fff7ed;
 }
-.more-info{
+
+.more-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.mySwiper {
-  width: 100%;
-  height: 300px;
+
+.gallery{
+  display:flex;
+  align-items: center;
+
 }
 
-.images-container {
+
+
+
+ .thumbnails img {
+  width: 303px;
+  height: 130px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.thumbnails {
+ 
+ position: relative;
+}
+
+.more-images p {
+  position: absolute;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90%;
+  background-color:#161616;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  top: 0;
 }
 
-.images-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 6px;
-}
-.offers-header{
+.offers-header {
   font-size: 21px;
   font-weight: 450;
 }
-.offers{
+
+.offers {
   margin-left: 30px;
+}
+.main-image img{
+  width:550px;
+  height: 270px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+@media (min-width: 650px) {
+  .main-image img{
+    max-width: 98%;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  .thumbnails{
+   width: 60%;
+  }
+  .thumbnails img {
+    width: 45%;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 6px;
+
+  }
+  .text-content2{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-right: 50px;
+  }
+  .text-content{
+    width: 50%;
+  }
+}
+@media (min-width: 900px) {
+  
+  .details-container {
+    padding: 10px 80px;
+  }
+
+
 }
 /*logging page styles.........................................loginnn page styles*/
 .login-container {
@@ -421,7 +642,33 @@ body {
 .signup-button:hover {
   background-color: #161616;
 }
-
+@media(min-width:500px) {
+  .auth-button {
+    width: 100%;
+  }
+  .form{
+    width: 100%;
+  }
+  .signup-button{
+    width:  100%;
+  }
+  .contain{
+    display:flex;
+    align-items: center;
+  }
+}
+.contain img{
+  display: none;
+ }
+@media(min-width:950px) {
+  .contain img{
+    display:block;
+    margin-right: 50px;
+   }
+   .faces{
+    margin: 0;
+   }
+}
 
 .login-link-container {
   display: flex;
@@ -761,12 +1008,13 @@ option {
 /*get to know us*/
 /* src/App.css */
 
-
 .get-to-know-us {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 15px;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 10px;
 }
 
 .profile-card {
@@ -775,10 +1023,10 @@ option {
   justify-content: space-between;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 15px;
+  padding: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 20px;
+
 }
 
 .profile-image {
@@ -786,15 +1034,14 @@ option {
   width: 90px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .profile-title {
   color: #4d4d4d;
   font-weight: bold;
-  margin:0;
+  margin: 0;
 }
-
 
 .svg-image {
   display: block;
@@ -802,6 +1049,27 @@ option {
   margin: 0;
   padding: 0;
 }
+.description{
+  width: 250px;
+}
+
+@media (min-width: 600px) {
+  
+}
+
+@media (min-width: 900px) {
+  .get-to-know-us {
+    padding: 0px 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  
+  .get-to-know-us {
+    padding: 0px 80px;
+  }
+}
+
 /**/
 .profile-container {
   display: flex;
@@ -920,20 +1188,18 @@ option {
   background-color: #fdfdfd;
 }
 
-.video-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
 
-}
 
 .text-container {
   flex: 1 1 45%;
   max-width: 500px;
   text-align: left;
 }
-
+@media (max-width:600px) {
+  .video-container {
+    margin: auto;
+   }
+}
 .text-container h2 {
   font-size: 2rem;
   font-weight: bold;
@@ -951,14 +1217,20 @@ option {
   font-weight: bold;
   margin-bottom: 15px;
 }
+.video-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 
-@media (min-width: 650px) {
+}
+@media (min-width: 900px) {
   .problem-statement-section {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-direction: row;
-      padding: 30px 40px;
+      padding: 30px 80px;
   }
   .video-container {
     display: flex;
@@ -967,7 +1239,69 @@ option {
     
   
   }
-  .video-container, .text-container {
-     
-  }
+  
+}
+.load-more-btn{
+  border:none;
+  padding: 10px 15px;
+  margin: auto;
+  font-family: poppins;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: #161616;
+}
+
+
+/*CHART STYLE...................................................*/
+
+.chat-window {
+  width: 300px;
+  height: 400px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #e1ffc7;
+  border-radius: 5px;
+}
+
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }

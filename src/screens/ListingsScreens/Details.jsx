@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
 import { doc, getDoc } from "firebase/firestore"; 
 import { db, auth } from '../../Firebase/Firebase';
 import { onAuthStateChanged } from "firebase/auth";
+import { useMediaQuery } from 'react-responsive';
 import Modal from '../../components/Modal';
 import CustomSkeleton from '../../components/Skeleton';
 import ReviewForm from '../../components/ReviewForm';
 import ReviewsList from '../../components/Reviewlist';
 import profilepic from "../../assets/profileImage.jpg";
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import ContactHostButton from '../../components/hostButton';
 
 export default function Details() {
     const { id } = useParams();
@@ -20,6 +22,8 @@ export default function Details() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(null);
     const [hostProfilePic, setHostProfilePic] = useState(null);
+
+    const isLargeScreen = useMediaQuery({ query: '(min-width: 700px)' });
 
     useEffect(() => {
         const fetchHouse = async () => {
@@ -76,7 +80,7 @@ export default function Details() {
     if (!house) {
         return <CustomSkeleton layout='details'/>;
     }
-
+    console.log(house)
     const filteredDetailsBoys = house.detailsBoys.filter(room => room.trim() !== '');
     const filteredDetailsGirls = house.detailsGirls.filter(room => room.trim() !== '');
 
@@ -85,70 +89,93 @@ export default function Details() {
             <Link to="/listings">Back to all Listings</Link>
             <div className='details'>
                 <div className='images-container'>
-                    <Swiper
-                        spaceBetween={30}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        modules={[Pagination]}
-                        className="mySwiper"
-                    >
-                        {house.images.map((image, index) => (
-                            <SwiperSlide key={index}>
-                                <img src={image} className='images' onClick={() => openModal(image)} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                    {isLargeScreen ? (
+                        <div className='gallery'>
+                            <div className='main-image'>
+                                <img src={house.images[0]} onClick={() => openModal(house.images[0])} />
+                            </div>
+                            <div className='thumbnails'>
+                                {house.images.slice(1, 5).map((image, index) => (
+                                    <img key={index} src={image} onClick={() => openModal(image)} />
+                                ))}
+                                {house.images.length > 5 && (
+                                    <div className='more-images' onClick={() => openModal(house.images[5])}>
+                                        <p>Show all photos</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ) : (
+                        <Swiper
+                            spaceBetween={30}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            modules={[Pagination]}
+                            className="mySwiper"
+                        >
+                           {house.images.map((image, index) => (
+                                <SwiperSlide key={index}>
+                                    <img src={image} className='images' onClick={() => openModal(image)} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    )}
                     <Modal isOpen={isOpen} onClose={closeModal} imageSrc={selectedImage} />
                 </div>
-                <div className='text-content'>
-                    <div className='text-header'>
-                        <h2>{house.name}</h2>
-                        <p>K{house.price}/mon</p>
-                    </div>
-                    <div className='host-info'>
-                        <img src={hostProfilePic || profilepic} className='host-image' alt="Host Profile" />
-                        <div>
-                            <p>Hosted by</p>
-                            <p>{house.hostName}</p>
+                   <div className='text-content2'>
+                        <div className='text-content'>
+                            <div className='text-header'>
+                                <h2>{house.name}</h2>
+                                <p>K{house.price}/mon</p>
+                            </div>
+                            <div className='host-info'>
+                                <img src={hostProfilePic || profilepic} className='host-image' alt="Host Profile" />
+                                <div>
+                                    <p>Hosted by</p>
+                                    <p>{house.hostName}</p>
+                                </div>
+                            </div>
+                            <button className='host-category'>{house.category}</button>
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 10, marginBottom: 20 }}>
+                                <p style={{ margin: 0 }}>{house.gender}</p>
+                                <p style={{ margin: 0 }}>{house.time} from {house.school}</p>
+                            </div>
+                            <p>{house.information}</p>
+                            <div style={{ marginTop: 10, marginBottom: 20 }}>
+                                <p className='offers-header'>What comes with this place!!!</p>
+                                <ul className='offers'>
+                                    {house.amenities.map((offer, index) => (
+                                        <li key={index}>{offer}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className='more-info'>
+                                {filteredDetailsBoys.length > 0 && (
+                                    <div>
+                                        <h4>Male rooms</h4>
+                                        {filteredDetailsBoys.map((room, index) => (
+                                            <p key={index}>{room}</p>
+                                        ))}
+                                    </div>
+                                )}
+                                {filteredDetailsGirls.length > 0 && (
+                                    <div>
+                                        <h4>Female rooms</h4>
+                                        {filteredDetailsGirls.map((room, index) => (
+                                            <p key={index}>{room}</p>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <button className='contactHost' onClick={() => handleTextHost(house.hostNumber, house.hostName)}>Contact Host</button>
+                    
                         </div>
-                    </div>
-                    <button className='host-category'>{house.category}</button>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 10, marginBottom: 20 }}>
-                        <p style={{ margin: 0 }}>{house.gender}</p>
-                        <p style={{ margin: 0 }}>{house.time} from {house.school}</p>
-                    </div>
-                    <p>{house.information}</p>
-                    <div style={{ marginTop: 10, marginBottom: 20 }}>
-                        <p className='offers-header'>What comes with this place!!!</p>
-                        <ul className='offers'>
-                            {house.amenities.map((offer, index) => (
-                                <li key={index}>{offer}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className='more-info'>
-                        {filteredDetailsBoys.length > 0 && (
-                            <div>
-                                <h4>Male rooms</h4>
-                                {filteredDetailsBoys.map((room, index) => (
-                                    <p key={index}>{room}</p>
-                                ))}
-                            </div>
-                        )}
-                        {filteredDetailsGirls.length > 0 && (
-                            <div>
-                                <h4>Female rooms</h4>
-                                {filteredDetailsGirls.map((room, index) => (
-                                    <p key={index}>{room}</p>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                    <button className='contactHost' onClick={() => handleTextHost(house.hostNumber, house.hostName)}>Contact Host</button>
-                    <ReviewForm listingId={id} currentUserId={currentUserId}/>
-                    <ReviewsList listingId={id} currentUserId={currentUserId}/>
-                </div>
+                     <div>
+                        <ReviewForm listingId={id} currentUserId={currentUserId}/>
+                        <ReviewsList listingId={id} currentUserId={currentUserId}/>
+                     </div>  
+                   </div>
             </div>
         </div>
     );

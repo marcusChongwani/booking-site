@@ -4,6 +4,7 @@ import {  doc, updateDoc, increment, serverTimestamp, where } from 'firebase/fir
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Components.css';
 import CustomSkeleton from './Skeleton';
+import imi from  '../assets/back2.png'
 
 export default function AllCards({ listings }) {
   
@@ -20,25 +21,25 @@ export default function AllCards({ listings }) {
   }
 
   // Check if listings array is empty
-  if (listings.length === 0) {
-    return <p>No listings available.</p>;
+  if (listings && listings.length === 0) {
+    return <p className='ifno'>No listings available.</p>;
   }
 
   return (
     <div className='all-cards-div'>
-      {listings.map((item) => (
+      {listings.map((item,index) => (
         <Link
           to={`/listings/${item.id}`}
-          key={item.id}
+          key={`${item.id}-${index}`}
           className="listing-link"
           onClick={() => handleListingClick(item.id)}
         >
           <div className="listing-card">
             <div className="card-media">
-              <img src={item.images[0]} alt="house" />
+              <img src={ item.images[0] || imi} alt="house" />
             </div>
             <div className="card-content">
-              <h2 className='header'>{item.name}</h2>
+              <h2 className='header1'>{item.name}</h2>
               <div className='listing-info'>
                 <p className="location">{item.location}</p>
                 <p className="lprice">K{item.price}/mon</p>

@@ -6,6 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { UserContext } from '../Firebase/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
+import  faces from "../assets/faces.png"
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -68,6 +69,8 @@ export default function Login() {
   return (
     <div className="login-container">
       <h2>Sign in to your account</h2>
+      <div className="contain">
+        <img src={faces} width="400" className='faces'/>
       <div className="form">
         <input
           type="email"
@@ -87,14 +90,14 @@ export default function Login() {
           required
           placeholder="Password"
         />
-      </div>
-      <button className="auth-button" onClick={login} disabled={isLoading}>
+        <button className="auth-button" onClick={login} disabled={isLoading}>
         {isLoading ? 'Signing In...' : 'Sign In'}
-      </button>
-      
-      <div className="auth-footer">
-        <p>Don't have an account?</p>
-        <Link to="/signup">Create one now</Link>
+        </button>
+        <div className="auth-footer">
+          <p>Don't have an account?</p>
+          <Link to="/signup">Create one now</Link>
+        </div>
+      </div>
       </div>
     </div>
   );

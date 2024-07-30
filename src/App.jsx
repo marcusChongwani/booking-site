@@ -32,6 +32,8 @@ import ManageUsers from './screens/Adminscreens/ManageUsers';
 import FeedBack from './screens/Adminscreens/FeedBack';
 import ProtectedRoute3 from './components/ProtectedRoute3';
 import { UserProvider } from './Firebase/UserContext';
+import Chat from './screens/chat/chat';
+import ContactHostButton from './components/hostButton';
 
 
 export default function App() {
@@ -55,7 +57,7 @@ export default function App() {
           <Route element={<ProtectedRoute2 />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/listings" element={<Listings />} />
-            <Route path="/listings/:id" element={<Details />} />
+            <Route path="/listings/:id" element={<Details />} />   
           </Route>
 
           <Route path="/login" element={<Login />} />

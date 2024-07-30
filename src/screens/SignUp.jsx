@@ -5,6 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from '../Firebase/Firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import bus from "../assets/bus.png"
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -70,6 +71,8 @@ export default function SignUp() {
   return (
     <div className="signup-container">
       <h2>Create an account</h2>
+      <div className="contain">
+        <img src={bus} width="400"/>
       <div className="form">
         <input
           type="text"
@@ -131,13 +134,14 @@ export default function SignUp() {
             Host
           </label>
         </div>
-      </div>
-      <button className="signup-button" onClick={signUp} disabled={isLoading}>
+        <button className="signup-button" onClick={signUp} disabled={isLoading}>
         {isLoading ? 'Signing Up...' : 'Sign Up'}
-      </button>
-      <div className="login-link-container">
-        <p>Already have an account?</p>
-        <Link to="/login">Login</Link>
+          </button>
+        <div className="login-link-container">
+          <p>Already have an account?</p>
+          <Link to="/login">Login</Link>
+        </div>
+      </div>
       </div>
     </div>
   );

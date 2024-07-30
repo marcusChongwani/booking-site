@@ -73,7 +73,6 @@ export default function HostListings() {
       ) : (
         <p>You have no listings.</p>
       )}
-       {console.log(listings)}
     </div>
   );
 }

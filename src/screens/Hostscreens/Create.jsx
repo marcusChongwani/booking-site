@@ -75,7 +75,12 @@ const Create = () => {
   };
 
   const handleImageChange = (e) => {
-    setImages(e.target.files);
+    const selectedImages = e.target.files;
+    if (selectedImages.length < 5 || selectedImages.length > 10) {
+      toast.error('Please select between 5 and 10 images.');
+      return;
+    }
+    setImages(selectedImages);
   };
 
   const compressImages = async (imageFiles) => {

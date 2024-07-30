@@ -36,7 +36,7 @@ const Footer = () => {
           <a href="#instagram" className="socialLink"><FaInstagram className='social-icon' /></a>
         </div>
         <div className="footerInfo">
-          <p>&copy; 2024 Vistra. All rights reserved.</p>
+          <p>&copy; 2024 Instay. All rights reserved.</p>
         </div>
       </div>
     </div>

@@ -43,7 +43,6 @@ const ReviewsList = ({ listingId, currentUserId }) => {
           )}
             </div>
           <p className="unique-review-comment">Comment: {review.comment}</p>
-          <p className="unique-review-user">By: Anonymous</p>
           <p className="unique-review-timestamp">On: {review.timestamp ? new Date(review.timestamp.seconds * 1000).toString() : 'No timestamp available'}</p>
          
         </div>

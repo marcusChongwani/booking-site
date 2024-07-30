@@ -6,19 +6,19 @@ import david from  '../assets/David.jpeg'
 const teamData = [
   {
     name: 'Marcus Chongwani',
-    title: 'Founder & Software Engineer',
+    title: 'Founder & S.E',
     description: 'Married To Code and\nAfternoon Nap Enthusiast',
     image: marcus
   },
   {
-    name: 'Jake Njovu',
+    name: 'Jackson Njovu',
     title: 'Founder & CTO',
-    description: 'Outside the box,\nGym boy\nLoves software',
+    description: 'Outside the box,Gym boy\nLoves software',
     image: jake
   },
   {
     name: 'David Nkana',
-    title: 'Leed Software Engineer',
+    title: 'Software Engineer',
     description: 'Loves coding\nEnjoys hiking\nPassionate about AI',
     image: david
     
@@ -35,7 +35,7 @@ const ProfileCard = ({ name, title, description, image }) => {
         <div>
         <h3>{name}</h3>
         <p className="profile-title">{title}</p>
-        <p>{description}</p>
+        <p className="description">{description}</p>
         </div>
     </div>
   );

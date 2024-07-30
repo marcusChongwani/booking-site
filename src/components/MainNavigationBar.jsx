@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import './Components.css';
 import { IoPerson } from "react-icons/io5";
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,7 +9,9 @@ import { db } from '../Firebase/Firebase';
 export default function MainNavigationBar() {
   const [userType, setUserType] = useState(null);
   const [user, setUser] = useState(null); // State to store current user
+  const [menuOpen, setMenuOpen] = useState(false); // State to toggle menu
   const auth = getAuth();
+  const location = useLocation(); // Hook to access the current route
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
@@ -25,12 +27,23 @@ export default function MainNavigationBar() {
     return () => unsubscribe(); // Clean up by unsubscribing from the auth state listener
   }, [auth]);
 
+  useEffect(() => {
+    // Close menu on route change
+    if (menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [location]);
+
   const fetchUserType = async (userAuth) => {
     const userDocRef = doc(db, 'Users', userAuth.uid); // Ensure 'Users' matches your Firestore collection
     const userDoc = await getDoc(userDocRef);
     if (userDoc.exists()) {
       setUserType(userDoc.data().role); // Ensure 'userType' is the correct field in your Firestore document
     }
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   const activeStyles = {
@@ -43,13 +56,18 @@ export default function MainNavigationBar() {
     textDecoration: "underline",
     color: "#161616"
   };
-  
+
   return (
     <nav className='nav'>
       <div className='logo'>
-        <NavLink to='/'>Vistra.</NavLink>
+        <NavLink to='/'>Instay.</NavLink>
       </div>
-      <div className='other-links'>
+      <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+      </div>
+      <div className={`other-links ${menuOpen ? 'show' : ''}`}>
         {userType === 'admin' && (
           <NavLink 
             to='/admin'
@@ -82,6 +100,7 @@ export default function MainNavigationBar() {
           <Link to='/profile' className='profile-icon'><IoPerson /></Link>
         )}
       </div>
+      {menuOpen && <div className="modal-overlay" onClick={toggleMenu}></div>}
     </nav>
   );
 }

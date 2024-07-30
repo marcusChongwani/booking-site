@@ -1,40 +1,155 @@
-
 /* Navigation Bar */
 .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .nav {
+    padding: 20px 80px;
+  }
+}
+
+/* Hamburger Menu Icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 11;
+  
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 2px 0;
+  transition: 0.4s;
+  border-radius: 50px;
+  
+}
+
+.hamburger.open .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.other-links {
+  display: flex;
+}
+.hamburger.open .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+@media (max-width: 500px) {
+  .hamburger {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 10px;
-    
   }
-    @media (min-width: 750px) {
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 40px;
-        
-      }
-    }
-  
+
+  .other-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 11;
+  }
+
+  .other-links.show {
+    display: flex;
+  }
+
   .nav a {
-    text-decoration: none;
+    margin: 10px 0;
   }
-  
-  .nav a:hover {
-    text-decoration: underline;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Profile Icon Styling */
+.profile-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.profile-icon svg {
+  font-size: 24px;
+}
+
+/* Styles for scroll-content a */
+.scroll-content a {
+  font-weight: bold;
+  font-size: 26px;
+  color: #161616;
+  margin-left: 10px;
+}
+
+.scroll-content a:hover {
+  text-decoration: none;
+}
+
+/* Hide scroll-content2 by default */
+
+.patners{
+  margin: 0;
+}
+.logo a {
+  font-weight: bold;
+  color: #161616;
+  font-size: 20px;
+}
+
+/* Media query for small screens */
+
+  .infinite-scroll-container {
+    overflow: hidden;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
   }
-  
-  .logo a {
-    font-weight: bold;
-    font-size: 26px;
-    color: #161616;
-    margin-left: 10px;
+
+  .scroll-content {
+    margin: 0;
+    display: flex; /* Ensure items are aligned in a row */
+    animation: scroll 15s linear infinite;
   }
-  .logo a:hover{
-    text-decoration: none;
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
-  
+
+
+.scroll-content img {
+  margin-right: 10px;
+  height: 150px; /* Adjust as needed */
+}
+
+
   .other-links a {
     margin-right: 10px;
     font-size: 19px;
@@ -124,9 +239,7 @@
     .patners{
       padding: 20px 40px;
     }
-    .logos img{
-      
-    }
+   
       
   }
 
@@ -136,7 +249,7 @@
 /*...............................HOW IT WORKSSSSS CSSS...................*/
 .how-it-works-container {
     text-align: center;
-    padding: 10px 20px ;
+    padding: 30px 20px ;
     margin: 0 auto;
 }
 
@@ -147,11 +260,6 @@
     margin-bottom: 30px;
 }
 
-.steps-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
 
 .step {
     flex: 1 1 200px;
@@ -192,7 +300,9 @@
     .section-title {
         font-size: 1.5rem;
     }
-
+   .steps-container{
+    display: flex;
+   }
     .step {
         flex: 1 1 100%;
         margin-bottom: 30px;
@@ -277,17 +387,28 @@
     padding-top: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
     .footerBottom {
         flex-direction: row;
     }
     .footerContainer {
         display: flex;
         justify-content: space-between;
+        padding: 10px 60px;
  
     }
 }
+@media (min-width: 1100px) {
+  .footerBottom {
+      flex-direction: row;
+  }
+  .footerContainer {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 10px;
 
+  }
+}
 .footerSocials {
     display: flex;
     gap: 20px;
@@ -311,75 +432,88 @@
 
 /*...............................Listingsssss card   CSSS...................*/
 
-.all-cards-div{
+/* All Cards Container */
+.all-cards-div {
   margin: 10px 0;
-  display: flex;
-  flex-wrap: wrap; 
+  width: 100%;
+  display: grid;
+  gap:10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid with a minimum width */
+ /* Space between cards */
 }
 
-.listing-link{
+/* Listing Link */
+.listing-link {
   text-decoration: none;
 }
-.listing-category{
-    margin-left: 4px;
-}
-.listing-card {
-    display: flex;
-    min-width: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 0;
-    margin-right: 10px;
-  }
-  
-  .card-media {
-    padding: 5px ;
-  }
-  
-  .card-media img {
-    width:140px;
-    height: 100px;
-    border-radius: 8px;
-    object-fit: fit;
-  }
-  
-  .card-content {
-    padding: 5px 0;
-    margin: 0 ;
-  }
 
-  .header {
-    padding: 0;
-    margin: 0;
-    font-weight: 450;
-    font-size: 18px;
-    color: #161616;
-  }
-  .school,.time{
-    margin: 0;
-    color: #161616;
-  }
-  .location{
-    margin: 0;
-    font-size: 15px;
-    color: #4d4d4d;
-    margin-right: 20px;
-  }
-  .lprice {
-    margin: 0;
-    font-size: 18px;
-    color: #4d4d4d;
-  }
-  .listing-info{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .gender {
-    color: #666;
-    margin: 0;
-  }
-  
+/* Listing Card */
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff; /* Add a background color for better visibility */
+  max-width: 100%; /* Ensure it doesn’t overflow the container */
+}
+
+/* Card Media */
+.card-media {
+  padding: 5px;
+  display: flex; /* Ensure that image scales correctly */
+}
+
+.card-media img {
+  width: 100%; /* Make image responsive */
+  height: 250px; /* Maintain aspect ratio */
+  border-radius: 8px;
+  object-fit: cover; /* Maintain aspect ratio without stretching */
+}
+
+/* Card Content */
+.card-content {
+  padding: 0 10px; /* Add padding for spacing */
+}
+
+.header1 {
+  font-weight: 450;
+  font-size: 18px;
+  color: #161616;
+}
+
+.school, .time {
+  margin: 0;
+  color: #161616;
+}
+
+.location {
+  margin: 0;
+  font-size: 15px;
+  color: #4d4d4d;
+  margin-right: 20px;
+}
+
+.lprice {
+  margin: 0;
+  font-size: 18px;
+  color: #4d4d4d;
+}
+
+.listing-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ifno{
+  font-family: poppins,arial;
+}
+.gender {
+  color: #666;
+  margin: 0;
+}
+
+/* Media queries for larger screens */
+
 /*...............................Modalllllllllll..CSSS...................*/
 
   .modal-overlay {
@@ -392,7 +526,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 10;
   }
   
   .modal-content {
@@ -484,10 +618,12 @@
 .unique-review-form {
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #e7e7e7;
   border-radius: 5px;
-  background-color: #f5f1f1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
+
 
 .unique-form-group {
   margin-bottom: 1%;
@@ -537,29 +673,34 @@
 
 /*listing of rating  **/
 .unique-reviews-list {
-  margin: 30px auto;
-  border-top: 2px solid #ddd;
+
+ 
 }
 
 .unique-reviews-header {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 10px;
 
 }
-
+.formss{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 .unique-review-card {
-  background-color: #f5f1f1;
-  border: 1px solid #e6e6e6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e7e7e7;
   border-radius: 8px;
-  padding: 15px;
+  padding: 10px;
   margin-bottom: 15px;
+  width: 350px;
 }
 
 .unique-review-comment, 
 .unique-review-user, 
 .unique-review-timestamp {
-  margin: 5px 0;
   color: #333333;
   font-size: 16px;
 }
