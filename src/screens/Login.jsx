@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { UserContext } from '../Firebase/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
-import  faces from "../assets/faces.png"
+import faces from "../assets/faces.png";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -14,12 +14,17 @@ export default function Login() {
     password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const login = async () => {
@@ -70,34 +75,37 @@ export default function Login() {
     <div className="login-container">
       <h2>Sign in to your account</h2>
       <div className="contain">
-        <img src={faces} width="400" className='faces'/>
-      <div className="form">
-        <input
-          type="email"
-          className="lform"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-          placeholder="Email address"
-        />
-        <input
-          type="password"
-          className="lform"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-          required
-          placeholder="Password"
-        />
-        <button className="auth-button" onClick={login} disabled={isLoading}>
-        {isLoading ? 'Signing In...' : 'Sign In'}
-        </button>
-        <div className="auth-footer">
-          <p>Don't have an account?</p>
-          <Link to="/signup">Create one now</Link>
+        <img src={faces} width="400" className='faces' />
+        <div className="signup-form">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            placeholder="Email address"
+          />
+          <div className="password-container">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+              placeholder="Password"
+            />
+            <button type="button" className="toggle-password" onClick={togglePasswordVisibility}>
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+          <button className="auth-button" onClick={login} disabled={isLoading}>
+            {isLoading ? 'Signing In...' : 'Sign In'}
+          </button>
+          <div className="auth-footer">
+            <p>Don't have an account?</p>
+            <Link to="/signup">Create one now</Link>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

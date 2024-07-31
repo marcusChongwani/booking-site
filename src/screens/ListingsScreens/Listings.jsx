@@ -1,49 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, query, where, limit, startAfter } from 'firebase/firestore';
-import { db } from '../../Firebase/Firebase'; // Import your Firebase config
+import { collection, getDocs, query, where, limit } from 'firebase/firestore';
+import { db } from '../../Firebase/Firebase'; // Ensure this path is correct
 import AllCards from '../../components/AllCards';
 import CustomSkeleton from '../../components/Skeleton';
 
 export default function Listings() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [lastDoc, setLastDoc] = useState(null);
-  const [isEndOfList, setIsEndOfList] = useState(false);
-  const batchSize = 15;
+  const [priceFilter, setPriceFilter] = useState(null);
+  
 
-  const fetchListings = async (lastDocument = null) => {
+  const fetchListings = async (priceFilter = null) => {
     setLoading(true);
     try {
-      let q = query(
-        collection(db, 'Listings'),
-        where('approved', '==', true),
-        limit(batchSize)
-      );
-      
-      if (lastDocument) {
-        q = query(q, startAfter(lastDocument));
+      let baseQuery = query(collection(db, 'Listings'), where('approved', '==', true));
+
+      if (priceFilter) {
+        switch (priceFilter) {
+          case 'lessK1000':
+            baseQuery = query(baseQuery, where('price', '<=', 1000));
+            break;
+          case 'lessK2000':
+            baseQuery = query(baseQuery, where('price', '<=', 2000));
+            break;
+          case 'lessK3000':
+            baseQuery = query(baseQuery, where('price', '<=', 3000));
+            break;
+          default:
+            break;
+        }
       }
 
-      const querySnapshot = await getDocs(q);
+
+      const querySnapshot = await getDocs(baseQuery);
       const fetchedListings = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      setListings(prevListings => {
-        // Filter out duplicates by checking if the listing already exists in the state
-        const newList = [...prevListings, ...fetchedListings];
-        const uniqueList = newList.filter((item, index, self) => 
-          index === self.findIndex((t) => t.id === item.id)
-        );
-        return uniqueList;
-      });
+      setListings(fetchedListings);
 
-      if (querySnapshot.docs.length < batchSize) {
-        setIsEndOfList(true);
-      } else {
-        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
-      }
     } catch (error) {
       console.error('Error fetching listings: ', error);
     } finally {
@@ -55,58 +51,10 @@ export default function Listings() {
     fetchListings();
   }, []);
 
-  const loadMoreListings = () => {
-    if (!isEndOfList && !loading) {
-      fetchListings(lastDoc);
-    }
-  };
-
-  const filterByPrice = async (priceFilter) => {
-    setLoading(true);
+  const handleFilterByPrice = (filter) => {
+    setPriceFilter(filter);
     setListings([]);
-    setLastDoc(null);
-    setIsEndOfList(false);
-    try {
-      let q;
-      const baseQuery = query(collection(db, 'Listings'), where('approved', '==', true));
-
-      if (priceFilter) {
-        switch (priceFilter) {
-          case 'lessK1000':
-            q = query(baseQuery, where('price', '<=', 1000));
-            break;
-          case 'lessK2000':
-            q = query(baseQuery, where('price', '<=', 2000));
-            break;
-          case 'lessK3000':
-            q = query(baseQuery, where('price', '<=', 3000));
-            break;
-          default:
-            q = baseQuery;
-            break;
-        }
-      } else {
-        q = baseQuery; // When no filter is applied, fetch all approved listings
-      }
-
-      q = query(q, limit(batchSize));
-      const querySnapshot = await getDocs(q);
-      const fetchedListings = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setListings(fetchedListings);
-
-      if (querySnapshot.docs.length < batchSize) {
-        setIsEndOfList(true);
-      } else {
-        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
-      }
-    } catch (error) {
-      console.error('Error filtering listings by price: ', error);
-    } finally {
-      setLoading(false);
-    }
+    fetchListings(filter);
   };
 
   return (
@@ -115,17 +63,14 @@ export default function Listings() {
       <div className='fills'>
         <p>Filter by </p>
         <div className="filters-container">
-          <button className='category' onClick={() => filterByPrice('lessK1000')}>Less K1000</button>
-          <button className='category' onClick={() => filterByPrice('lessK2000')}>Less K2000</button>
-          <button className='category' onClick={() => filterByPrice('lessK3000')}>Less K3000</button>
-          <button className='category' onClick={() => filterByPrice()}>All...</button>
+          <button className='category' onClick={() => handleFilterByPrice('lessK1000')}>Less K1000</button>
+          <button className='category' onClick={() => handleFilterByPrice('lessK2000')}>Less K2000</button>
+          <button className='category' onClick={() => handleFilterByPrice('lessK3000')}>Less K3000</button>
+          <button className='category' onClick={() => handleFilterByPrice(null)}>All...</button>
         </div>
       </div>
       {loading && <CustomSkeleton layout='allCards' />}
       <AllCards listings={listings} />
-      {!isEndOfList && !loading && (
-        <button onClick={loadMoreListings}className='load-more-btn'>Load More</button>
-      )}
     </div>
   );
 }

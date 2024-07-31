@@ -15,9 +15,9 @@ const CustomSkeleton = ({ layout }) => {
     case 'allCards':
       return (
         <div className="skeleton-container">
-          {[...Array(2)].map((_, index) => (
+          {[...Array(1)].map((_, index) => (
             <div key={index} className="skeleton-card">
-              <Skeleton height={95} width={"100%"} />
+              <Skeleton height={180} width={"100%"} />
             </div>
           ))}
         </div>
@@ -25,9 +25,9 @@ const CustomSkeleton = ({ layout }) => {
     case 'hostCards':
       return (
         <div className="skeleton-container">
-          {[...Array(2)].map((_, index) => (
+          {[...Array(1)].map((_, index) => (
             <div key={index} className="skeleton-card">
-              <Skeleton height={70} width={350} />
+              <Skeleton height={70} width={"100%"} />
             </div>
           ))}
         </div>

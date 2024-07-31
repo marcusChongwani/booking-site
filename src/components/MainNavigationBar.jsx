@@ -49,18 +49,18 @@ export default function MainNavigationBar() {
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
-    color: "#ff8c38"
+    color: "#ff5a5f"
   };
   const active = {
     fontWeight: "bold",
     textDecoration: "underline",
-    color: "#161616"
+    color: "#ec2930"
   };
 
   return (
     <nav className='nav'>
       <div className='logo'>
-        <NavLink to='/'>Instay.</NavLink>
+        <NavLink to='/'>In<span style={{color:"#FF5A5F"}}>stay.</span></NavLink>
       </div>
       <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
         <div className="bar"></div>

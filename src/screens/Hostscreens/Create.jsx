@@ -113,14 +113,12 @@ const Create = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!userUid) {
-      toast.error('User not authenticated');
-      setIsLoading(false);
-      return;
-    }
+    toast.promise(
+      (async () => {
+        if (!userUid) {
+          throw new Error('User not authenticated');
+        }
 
-    const createListingPromise = (async () => {
-      try {
         const compressedImages = await compressImages(images);
         const imageUrls = await uploadImages(compressedImages);
         const {
@@ -177,19 +175,14 @@ const Create = () => {
         });
         setImages([]);
         setListingId(uuidv4());
-      } catch (error) {
-        console.error('Error adding document:', error);
-        throw new Error('Failed to create listing');
+        toast.success('Listing created successfully!');
+      })(),
+      {
+        pending: 'Creating your listing...',
+        success: 'Listing created successfully!',
+        error: 'Failed to create listing',
       }
-    })();
-
-    toast.promise(createListingPromise, {
-      pending: 'Creating listing, please wait...',
-      success: 'Listing created successfully!',
-      error: 'Failed to create listing',
-    });
-
-    createListingPromise.finally(() => {
+    ).finally(() => {
       setIsLoading(false);
     });
   };
@@ -200,15 +193,15 @@ const Create = () => {
       <div>
         <form className="listing-form" onSubmit={handleSubmit}>
           <label htmlFor="title">Title</label>
-          <input type="text" id="title" required name="name" value={formData.name} onChange={handleInputChange} />
+          <input type="text" id="title" required name="name" value={formData.name} onChange={handleInputChange} disabled={isLoading} />
 
           <label htmlFor="images">Images</label>
-          <input type="file" id="images" name="images" multiple onChange={handleImageChange} className="file-input" />
+          <input type="file" id="images" name="images" multiple onChange={handleImageChange} className="file-input" disabled={isLoading} />
 
           <div className="form-row">
             <div className="half">
               <label htmlFor="cat">Category</label>
-              <select id="cat" name="category" value={formData.category} onChange={handleInputChange} required>
+              <select id="cat" name="category" value={formData.category} onChange={handleInputChange} required disabled={isLoading}>
                 <option value="Basic">Basic</option>
                 <option value="Midrange">Midrange</option>
                 <option value="Premium">Premium</option>
@@ -216,42 +209,42 @@ const Create = () => {
             </div>
             <div className="half2">
               <label htmlFor="gen">Gender</label>
-              <input type="text" id="gen" name="gender" value={formData.gender} onChange={handleInputChange} required />
+              <input type="text" id="gen" name="gender" value={formData.gender} onChange={handleInputChange} required disabled={isLoading} />
             </div>
           </div>
 
           <label htmlFor="description">Description</label>
-          <input type="text" id="description" name="information" value={formData.information} onChange={handleInputChange} required rows="4" />
+          <input type="text" id="description" name="information" value={formData.information} onChange={handleInputChange} required rows="4" disabled={isLoading} />
 
           <div className="form-row">
             <div className="half">
               <label htmlFor="price">Price per month</label>
-              <input type="number" id="price" name="price" value={formData.price} onChange={handleInputChange} required />
+              <input type="number" id="price" name="price" value={formData.price} onChange={handleInputChange} required disabled={isLoading} />
             </div>
             <div className="half2">
               <label htmlFor="location">Location</label>
-              <input type="text" id="location" name="location" value={formData.location} onChange={handleInputChange} required />
+              <input type="text" id="location" name="location" value={formData.location} onChange={handleInputChange} required disabled={isLoading} />
             </div>
           </div>
 
           <div className="form-row">
             <div className="half">
               <label htmlFor="school">Nearby school</label>
-              <input type="text" id="school" name="school" value={formData.school} onChange={handleInputChange} />
+              <input type="text" id="school" name="school" value={formData.school} onChange={handleInputChange} disabled={isLoading} />
             </div>
             <div className="half2">
               <label htmlFor="time">Time</label>
-              <input type="text" id="time" name="time" value={formData.time} onChange={handleInputChange} />
+              <input type="text" id="time" name="time" value={formData.time} onChange={handleInputChange} disabled={isLoading} />
             </div>
           </div>
 
           <label htmlFor="amenities">Amenities (comma-separated)</label>
-          <input type="text" id="amenities" name="amenities" value={formData.amenities} onChange={handleInputChange} required />
+          <input type="text" id="amenities" name="amenities" value={formData.amenities} onChange={handleInputChange} required disabled={isLoading} />
           <label htmlFor="male">Male rooms (comma-separated)</label>
-          <input type="text" id="male" name="detailsBoys" value={formData.detailsBoys} onChange={handleInputChange} />
+          <input type="text" id="male" name="detailsBoys" value={formData.detailsBoys} onChange={handleInputChange} disabled={isLoading} />
 
           <label htmlFor="female">Female rooms (comma-separated)</label>
-          <input type="text" id="female" name="detailsGirls" value={formData.detailsGirls} onChange={handleInputChange} />
+          <input type="text" id="female" name="detailsGirls" value={formData.detailsGirls} onChange={handleInputChange} disabled={isLoading} />
 
           <button type="submit" disabled={isLoading}>Submit</button>
         </form>

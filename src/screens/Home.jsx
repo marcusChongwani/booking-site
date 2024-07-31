@@ -53,7 +53,6 @@ export default function Home() {
           </section>
         </div>
         <FeedbackForm/>
-       <Chat/>
     </div>
   )
 }

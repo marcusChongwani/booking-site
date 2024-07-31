@@ -41,7 +41,7 @@ body {
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  background-color: #161616;
+  background-color: #FF5A5F;
   border: none;
   width: 180px;
   padding-block: 0.75rem;
@@ -52,7 +52,7 @@ body {
   transition: transform 0.1s ease-in-out;
 }
 .hero a:hover{
-  background-color: #161616;
+  background-color: #ec2930;
 }
 .hero{
   padding: 10px 20px;
@@ -92,7 +92,7 @@ body {
   .hero a {
     text-align: center;
     text-decoration: none;
-    background-color: #161616;
+    background-color: #FF5A5F;
     border: none;
     width: 180px;
     color: white;
@@ -198,7 +198,7 @@ body {
 .about-link {
   text-align: center;
   text-decoration: none;
-  background-color: #161616;
+  background-color: #FF5A5F;
   border: none;
   color: white;
   border-radius: 5px;
@@ -207,6 +207,8 @@ body {
   margin-left: 20px;
   padding: 10px 20px;
 }
+.about-link:hover{
+  background-color: #ec2930}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -297,15 +299,23 @@ body {
   margin-top: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Changed 'left' to 'flex-start' for better alignment */
+  /* Changed 'left' to 'flex-start' for better alignment */
 }
 
 /* Filters container styles */
 .filters-container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-bottom: 10px;
+}
+.filters-container button{
+  background-color: #1b0f0f;
+  color: #ffff;
+}
+.filters-container button:hover{
+  background-color: #FF5A5F;
+
 }
 
 .clear {
@@ -389,11 +399,11 @@ body {
 
 .category {
   border: none;
-  background-color: #ffcc8d;
+  background-color: #767676;
   padding: 5px;
   border-radius: 5px;
   margin-top: 10px;
-  color: #4d4d4d;
+  color: #ffff;
   font-family: Poppins;
   margin-right: 10px;
 }
@@ -401,7 +411,7 @@ body {
 .contactHost {
   text-decoration: none;
   width: 100%;
-  background-color: #ff8c38;
+  background-color: #FF5A5F;
   border: none;
   padding: 12px;
   border-radius: 7px;
@@ -409,6 +419,7 @@ body {
   margin-top: 10px;
   font-weight: bold;
   color: #fff7ed;
+  font-family: poppins;
 }
 
 .more-info {
@@ -507,7 +518,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -515,14 +526,6 @@ body {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  width: 100%;
-  padding: 0 5px;
 }
 
 .lform{
@@ -536,14 +539,12 @@ body {
   margin-bottom: 10px;
 }
 
-.input-field:focus {
-  border-color: #ff8c38;
-}
+
 
 .auth-button {
     width: 100%;
     padding: 10px;
-    background-color: #ff8c38;
+    background-color: #FF5A5F;
     color: #fff7ed;
     border: none;
     border-radius: 5px;
@@ -553,7 +554,7 @@ body {
 }
 
 .auth-button:hover {
-  background-color: #161616;
+  background-color: #ec2930;
 }
 
 .auth-footer {
@@ -563,14 +564,14 @@ body {
 }
 
 .auth-footer a {
-  color: #ff8c38;
+  color: #FF5A5F;
   text-decoration: none;
   margin-left: 5px;
 }
 
 .auth-footer a:hover {
   text-decoration: underline;
-  color: #161616;
+  color: #ec2930;
   font-weight: bold;
 }
 
@@ -580,22 +581,21 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+
   text-align: center;
 }
 .signup-container h2 {
   margin-bottom: 20px;
 }
 
-.form {
-  margin-bottom: 20px;
-  width: 100%;
-  padding: 0 5px;
+.signup-form{
+  display: flex;
+  align-items: center;
+  flex-direction:column;
+  padding: 20px 0;
 }
-
-.input-field {
+.signup-form input{
   width: 100%;
-  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -605,31 +605,30 @@ body {
 }
 
 .input-field:focus {
-  border-color: #ff8c38;
+  border-color: #FF5A5F;
   outline: none;
 }
-
-.radio-container {
+.radio-contain {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  margin: 10px 0;
+ 
 }
 
-.radio-container label {
-  margin: 0 10px;
+.radio-contain label {
+  padding: 10px;
   display: flex;
   align-items: center;
 }
 
-.radio-container input[type="radio"] {
-  margin-right: 5px;
+.radio-contain input[type="radio"] {
+  margin: auto;
 }
 
 .signup-button {
   width: 100%;
   padding: 10px;
-  background-color: #ff8c38;
+  background-color: #FF5A5F;
   color: #fff7ed;
   border: none;
   border-radius: 5px;
@@ -640,17 +639,12 @@ body {
 }
 
 .signup-button:hover {
-  background-color: #161616;
+  background-color: #ec2930;
 }
 @media(min-width:500px) {
-  .auth-button {
-    width: 100%;
-  }
-  .form{
-    width: 100%;
-  }
+
   .signup-button{
-    width:  100%;
+    width:100%;
   }
   .contain{
     display:flex;
@@ -689,6 +683,28 @@ body {
   text-decoration: underline;
   font-weight: bold;
   color: #161616;
+}
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: #FF5A5F;
+  font-family: poppins;
+}
+.password-requirements {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
 }
 
 /*.......................hosttt dashhhh boarddddd .........................*/
@@ -1026,6 +1042,8 @@ option {
   padding: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+
 
 }
 
@@ -1053,8 +1071,25 @@ option {
   width: 250px;
 }
 
-@media (min-width: 600px) {
-  
+@media (max-width: 405px) {
+.profile-image {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.profile-title {
+  color: #4d4d4d;
+  font-weight: bold;
+  margin: 0;
+  font-size: 15px;
+}
+.description{
+  width: 100%;
+}
+
 }
 
 @media (min-width: 900px) {
@@ -1187,7 +1222,9 @@ option {
   padding: 30px 20px;
   background-color: #fdfdfd;
 }
-
+.video-container video{
+  width: 100%;
+}
 
 
 .text-container {
@@ -1255,53 +1292,17 @@ option {
 
 /*CHART STYLE...................................................*/
 
-.chat-window {
-  width: 300px;
-  height: 400px;
-  border: 1px solid #ccc;
-  overflow-y: auto;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #f9f9f9;
-}
 
-.message {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #e1ffc7;
-  border-radius: 5px;
-}
 
-.profile-pic {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
 
-.input-area {
-  display: flex;
-  gap: 10px;
-}
+
 
 input {
-  width: 200px;
+  
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
-button:hover {
-  background-color: #0056b3;
-}
+

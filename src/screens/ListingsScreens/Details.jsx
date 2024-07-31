@@ -9,8 +9,8 @@ import CustomSkeleton from '../../components/Skeleton';
 import ReviewForm from '../../components/ReviewForm';
 import ReviewsList from '../../components/Reviewlist';
 import profilepic from "../../assets/profileImage.jpg";
-import 'swiper/css'
-import 'swiper/css/pagination'
+import 'swiper/css';
+import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import ContactHostButton from '../../components/hostButton';
@@ -22,11 +22,13 @@ export default function Details() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(null);
     const [hostProfilePic, setHostProfilePic] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const isLargeScreen = useMediaQuery({ query: '(min-width: 700px)' });
 
     useEffect(() => {
         const fetchHouse = async () => {
+            setLoading(true);
             const docRef = doc(db, "Listings", id);
             const docSnap = await getDoc(docRef);
 
@@ -44,6 +46,7 @@ export default function Details() {
             } else {
                 console.log("No such document!");
             }
+            setLoading(false);
         };
 
         fetchHouse();
@@ -77,10 +80,14 @@ export default function Details() {
         setSelectedImage(null);
     };
 
-    if (!house) {
-        return <CustomSkeleton layout='details'/>;
+    if (loading) {
+        return <CustomSkeleton layout='details' />;
     }
-    console.log(house)
+
+    if (!house) {
+        return <div>No house data found.</div>;
+    }
+
     const filteredDetailsBoys = house.detailsBoys.filter(room => room.trim() !== '');
     const filteredDetailsGirls = house.detailsGirls.filter(room => room.trim() !== '');
 
@@ -123,59 +130,58 @@ export default function Details() {
                     )}
                     <Modal isOpen={isOpen} onClose={closeModal} imageSrc={selectedImage} />
                 </div>
-                   <div className='text-content2'>
-                        <div className='text-content'>
-                            <div className='text-header'>
-                                <h2>{house.name}</h2>
-                                <p>K{house.price}/mon</p>
-                            </div>
-                            <div className='host-info'>
-                                <img src={hostProfilePic || profilepic} className='host-image' alt="Host Profile" />
-                                <div>
-                                    <p>Hosted by</p>
-                                    <p>{house.hostName}</p>
-                                </div>
-                            </div>
-                            <button className='host-category'>{house.category}</button>
-                            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 10, marginBottom: 20 }}>
-                                <p style={{ margin: 0 }}>{house.gender}</p>
-                                <p style={{ margin: 0 }}>{house.time} from {house.school}</p>
-                            </div>
-                            <p>{house.information}</p>
-                            <div style={{ marginTop: 10, marginBottom: 20 }}>
-                                <p className='offers-header'>What comes with this place!!!</p>
-                                <ul className='offers'>
-                                    {house.amenities.map((offer, index) => (
-                                        <li key={index}>{offer}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className='more-info'>
-                                {filteredDetailsBoys.length > 0 && (
-                                    <div>
-                                        <h4>Male rooms</h4>
-                                        {filteredDetailsBoys.map((room, index) => (
-                                            <p key={index}>{room}</p>
-                                        ))}
-                                    </div>
-                                )}
-                                {filteredDetailsGirls.length > 0 && (
-                                    <div>
-                                        <h4>Female rooms</h4>
-                                        {filteredDetailsGirls.map((room, index) => (
-                                            <p key={index}>{room}</p>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                            <button className='contactHost' onClick={() => handleTextHost(house.hostNumber, house.hostName)}>Contact Host</button>
-                    
+                <div className='text-content2'>
+                    <div className='text-content'>
+                        <div className='text-header'>
+                            <h2>{house.name}</h2>
+                            <p>K{house.price}/mon</p>
                         </div>
-                     <div>
-                        <ReviewForm listingId={id} currentUserId={currentUserId}/>
-                        <ReviewsList listingId={id} currentUserId={currentUserId}/>
-                     </div>  
-                   </div>
+                        <div className='host-info'>
+                            <img src={hostProfilePic || profilepic} className='host-image' alt="Host Profile" />
+                            <div>
+                                <p>Hosted by</p>
+                                <p>{house.hostName}</p>
+                            </div>
+                        </div>
+                        <button className='category'>{house.category}</button>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 10, marginBottom: 20 }}>
+                            <p style={{ margin: 0 }}>{house.gender}</p>
+                            <p style={{ margin: 0 }}>{house.time} from {house.school}</p>
+                        </div>
+                        <p>{house.information}</p>
+                        <div style={{ marginTop: 10, marginBottom: 20 }}>
+                            <p className='offers-header'>What comes with this place!!!</p>
+                            <ul className='offers'>
+                                {house.amenities.map((offer, index) => (
+                                    <li key={index}>{offer}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className='more-info'>
+                            {filteredDetailsBoys.length > 0 && (
+                                <div>
+                                    <h4>Male rooms</h4>
+                                    {filteredDetailsBoys.map((room, index) => (
+                                        <p key={index}>{room}</p>
+                                    ))}
+                                </div>
+                            )}
+                            {filteredDetailsGirls.length > 0 && (
+                                <div>
+                                    <h4>Female rooms</h4>
+                                    {filteredDetailsGirls.map((room, index) => (
+                                        <p key={index}>{room}</p>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <button className='contactHost' onClick={() => handleTextHost(house.hostNumber, house.hostName)}>Contact Host</button>
+                    </div>
+                    <div>
+                        <ReviewForm listingId={id} currentUserId={currentUserId} />
+                        <ReviewsList listingId={id} currentUserId={currentUserId} />
+                    </div>
+                </div>
             </div>
         </div>
     );

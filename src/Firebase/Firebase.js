@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 import { doc, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCIse7vRCCZBXkI8hW4ImDdqUdphGgsDw0",
-  authDomain: "vistra-fcb0f.firebaseapp.com",
-  projectId: "vistra-fcb0f",
-  storageBucket: "vistra-fcb0f.appspot.com",
-  messagingSenderId: "628121407924",
-  appId: "1:628121407924:web:c1be775dca937ed71da2e1"
+  apiKey: "AIzaSyD_JPPjYWdccTCucn9lMyjy804IUIauqlw",
+  authDomain: "instay-ff5e2.firebaseapp.com",
+  projectId: "instay-ff5e2",
+  storageBucket: "instay-ff5e2.appspot.com",
+  messagingSenderId: "121610435628",
+  appId: "1:121610435628:web:af41f7cd17863bc937a589"
 };
 
 const app = initializeApp(firebaseConfig);
