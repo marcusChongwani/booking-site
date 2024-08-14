@@ -1,21 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { doc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase';
-import { doc, updateDoc, increment, serverTimestamp } from 'firebase/firestore';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Components.css';
 import CustomSkeleton from './Skeleton';
 import imi from '../assets/back2.png';
 
 export default function AllCards({ listings }) {
+  const handleListingClick = async (listingId) => {
+    try {
+      const listingRef = doc(db, 'Listings', listingId);
   
-  const handleListingClick = async (id) => {
-    const listingRef = doc(db, 'Listings', id);
-    await updateDoc(listingRef, {
-      clicks: increment(1),
-      lastClickedAt: serverTimestamp() // Update with current timestamp
-    });
+      // Increment the click count and update the last clicked timestamp
+      await updateDoc(listingRef, {
+        clicks: increment(1),
+        lastClickedAt: new Date(),
+      });
+  
+      // Add a new document to the 'clicks' subcollection
+      const clicksRef = collection(listingRef, 'clicks');
+      await addDoc(clicksRef, {
+        clickedAt: new Date(),
+      });
+  
+    } catch (error) {
+      console.error('Error updating click data:', error);
+    }
+  
   };
 
+  // Render loading state or empty state
   if (!listings) {
     return <CustomSkeleton layout='allCards' />;
   }
@@ -35,6 +49,11 @@ export default function AllCards({ listings }) {
           onClick={() => handleListingClick(item.id)}
         >
           <div className="listing-card">
+            <div className="badge-container">
+              <span className={`badge ${item.isAvailable ? 'badge-available' : 'badge-not-available'}`}>
+                {item.isAvailable ? 'Space Available' : 'No Space'}
+              </span>
+            </div>
             <div className="card-media">
               <img src={item.images?.[0] || imi} alt="house" />
             </div>

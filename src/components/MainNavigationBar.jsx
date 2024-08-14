@@ -5,6 +5,7 @@ import { IoPerson } from "react-icons/io5";
 import { doc, getDoc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../Firebase/Firebase';
+import ThemeToggleButton from './Toggle';
 
 export default function MainNavigationBar() {
   const [userType, setUserType] = useState(null);
@@ -51,6 +52,7 @@ export default function MainNavigationBar() {
     textDecoration: "underline",
     color: "#ff5a5f"
   };
+
   const active = {
     fontWeight: "bold",
     textDecoration: "underline",
@@ -60,8 +62,9 @@ export default function MainNavigationBar() {
   return (
     <nav className='nav'>
       <div className='logo'>
-        <NavLink to='/'>In<span style={{color:"#FF5A5F"}}>stay.</span></NavLink>
+        <NavLink to='/'><span style={{color:"#FF5A5F"}}>Instay.</span></NavLink>
       </div>
+   
       <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
         <div className="bar"></div>
         <div className="bar"></div>
@@ -91,7 +94,7 @@ export default function MainNavigationBar() {
           About
         </NavLink>
         <NavLink 
-          to='/listings'
+          to={user ? '/listings' : '/public-listings'}
           style={({ isActive }) => isActive ? activeStyles : null}
         >
           Listings

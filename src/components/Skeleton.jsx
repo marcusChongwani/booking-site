@@ -82,7 +82,7 @@ const CustomSkeleton = ({ layout }) => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <Skeleton height={350} />
+            
             </div>
             <div className='text-content'>
               <div className='text-header'>

@@ -1,9 +1,8 @@
-import '../screens/Adminscreens/Admin.css'; // Create this CSS file for styling
 import React, { useState } from 'react';
 import { db } from '../Firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-
+import '../screens/Adminscreens/Admin.css'; // Ensure styles are included
 
 const FeedbackForm = () => {
   const [name, setName] = useState('');
@@ -33,7 +32,7 @@ const FeedbackForm = () => {
 
   return (
     <form className="feedback-form" onSubmit={handleSubmit}>
-      <h2 className="feedback-form-title">Submit Your Feedback</h2>
+      <h2 className="feedback-form-title">Leave Us A </h2>
       <input 
         type="text" 
         placeholder="Your Name" 
@@ -43,8 +42,8 @@ const FeedbackForm = () => {
         required 
       />
       <input 
-        type="number" 
-        placeholder="Your Number" 
+        type="text" 
+        placeholder="Your Phone Number" 
         value={number} 
         onChange={(e) => setNumber(e.target.value)} 
         className="feedback-input" 

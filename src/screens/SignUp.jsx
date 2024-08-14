@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore"; 
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore'; 
 import { auth, db } from '../Firebase/Firebase';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import bus from "../assets/bus.png";
+import bus from '../assets/bus.png';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -18,7 +18,13 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordValid, setPasswordValid] = useState(true);
+  const [isChecked, setIsChecked] = useState(false); // State for checkbox
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Show a toast notification when the page loads
+    toast.info('Sign up to view all listings and details.');
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +37,10 @@ export default function SignUp() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
   };
 
   const signUp = async () => {
@@ -46,6 +56,11 @@ export default function SignUp() {
       return;
     }
 
+    if (!isChecked) {
+      toast.error('You must agree to the terms and conditions.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -57,6 +72,7 @@ export default function SignUp() {
         phone,
         email,
         role,
+        acceptedTerms: isChecked // Save checkbox status to the database
       });
       toast.success("Account created successfully!");
       navigate('/login');
@@ -119,32 +135,49 @@ export default function SignUp() {
             <p className="password-requirements">Password must be at least 8 characters long.</p>
           )}
           <div className="radio-contain">
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="user"
-                checked={formData.role === 'user'}
-                onChange={handleInputChange}
-                required
-                disabled={isLoading}
-              />
-              User
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="host"
-                checked={formData.role === 'host'}
-                onChange={handleInputChange}
-                required
-                disabled={isLoading}
-              />
-              Host
-            </label>
+            <div className='radio'>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="user"
+                  checked={formData.role === 'user'}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isLoading}
+                />
+                <span className='inn'>User</span>
+              </label>
+            </div>
+            <div className='radio'> 
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="host"
+                  checked={formData.role === 'host'}
+                  onChange={handleInputChange}
+                  required
+                  disabled={isLoading}
+                />
+                <span className='inn'>Host</span>
+              </label>
+            </div>
           </div>
-          <button className="signup-button" onClick={signUp} disabled={isLoading}>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              id="termsAndConditions"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              className="terms-checkbox"
+            />
+            <label htmlFor="termsAndConditions" className="terms-label">
+              I have read, understood, and agree to the Terms and Conditions </label>
+          </div>
+          <Link to="/terms-and-conditions" className="defff" >Terms & conditions</Link>
+
+          <button className="signup-button" onClick={signUp} disabled={isLoading || !isChecked}>
             {isLoading ? 'Signing Up...' : 'Sign Up'}
           </button>
           <div className="login-link-container">

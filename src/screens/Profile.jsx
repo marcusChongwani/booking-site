@@ -7,7 +7,8 @@ import { UserContext } from '../Firebase/UserContext';
 import { db, storage } from '../Firebase/Firebase'; // Import Firebase storage and Firestore
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
-import { MdDeleteOutline,MdAdd } from "react-icons/md";
+import { MdDeleteOutline, MdAdd } from "react-icons/md";
+
 
 const Profile = () => {
   const { user, signOut } = useContext(UserContext);
@@ -91,7 +92,7 @@ const Profile = () => {
         <label htmlFor="file-upload" className="custom-file-upload">
           <MdAdd className="add-icon" />
         </label>
-        <input id="file-upload" type="file" onChange={handleFileChange} />
+        <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} />
         <button className="upload-button" onClick={handleUpload}>
           Upload
         </button>

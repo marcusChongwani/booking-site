@@ -1,17 +1,15 @@
-// src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getStorage } from 'firebase/storage';
 import { getAuth } from "firebase/auth";
-import { doc, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD_JPPjYWdccTCucn9lMyjy804IUIauqlw",
-  authDomain: "instay-ff5e2.firebaseapp.com",
-  projectId: "instay-ff5e2",
-  storageBucket: "instay-ff5e2.appspot.com",
-  messagingSenderId: "121610435628",
-  appId: "1:121610435628:web:af41f7cd17863bc937a589"
+  apiKey: "AIzaSyAWBQA7Ex826TbnJR62cLBZMCaLGn2AmvA",
+  authDomain: "instay-db4cd.firebaseapp.com",
+  projectId: "instay-db4cd",
+  storageBucket: "instay-db4cd.appspot.com",
+  messagingSenderId: "889307305159",
+  appId: "1:889307305159:web:957f656ee25fa7d58cdae2"
 };
 
 const app = initializeApp(firebaseConfig);

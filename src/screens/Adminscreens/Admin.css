@@ -209,7 +209,7 @@
   /* FeedbackForm.css */
 .feedback-form {
   max-width: 600px;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
 }
 
@@ -230,7 +230,7 @@
 }
 
 .feedback-submit-button {
-  padding: 10px 20px;
+  padding: 10px 40px;
   background-color: #FF5A5F;
   color: white;
   border: none;

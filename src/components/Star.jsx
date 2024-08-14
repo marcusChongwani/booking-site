@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaStar } from "react-icons/fa";
 
 const Star = ({ rating, onRatingChange }) => {
   const stars = Array.from({ length: 5 }, (_, index) => index + 1);
@@ -12,7 +13,7 @@ const Star = ({ rating, onRatingChange }) => {
           onClick={() => onRatingChange(star)}
           className='star'
         >
-          ★
+          <FaStar />
         </span>
       ))}
     </div>

@@ -2,29 +2,37 @@ import React from 'react';
 import marcus from  '../assets/marcus.jpeg'
 import jake from  '../assets/JAKE.jpeg'
 import david from  '../assets/David.jpeg'
+import roy from  '../assets/roy.jpeg'
 
 const teamData = [
   {
     name: 'Marcus Chongwani',
     title: 'Founder & S.E',
-    description: 'Married To Code and\nAfternoon Nap Enthusiast',
+    description: 'Innovative Thinker\nCode Enthusiast\nVisionary Leader',
     image: marcus
   },
   {
     name: 'Jackson Njovu',
     title: 'Founder & CTO',
-    description: 'Outside the box,Gym boy\nLoves software',
+    description: 'Tech Visionary\nProblem Solver\nGym Enthusiast',
     image: jake
   },
   {
     name: 'David Nkana',
     title: 'Software Engineer',
-    description: 'Loves coding\nEnjoys hiking\nPassionate about AI',
+    description: 'Code Craftsman\nAI Aficionado\nHiking Adventurer',
     image: david
-    
   },
-
+  {
+    name: 'Roy Kamwanza',
+    title: 'Marketing Specialist',
+    description: 'Brand Strategist\nContent Creator\nGrowth Driver',
+    image: roy
+  }
 ];
+
+
+
 
 const ProfileCard = ({ name, title, description, image }) => {
   return (

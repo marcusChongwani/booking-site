@@ -69,9 +69,9 @@ export default function FeaturedCard() {
                   {item.name}
                 </Typography>
                 <Typography 
-                  variant="body2" 
+                  variant="h6" 
                   style={{ 
-                    color: 'rgba(255, 255, 255, 0.7)',
+                    color: 'GREY',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',

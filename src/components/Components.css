@@ -1,4 +1,5 @@
 /* Navigation Bar */
+
 .nav {
   display: flex;
   align-items: center;
@@ -205,7 +206,7 @@
     background-color: #161616;
     border: none;
     width: 140px;
-    color: white;
+    
     border-radius: 6px;
     cursor: pointer;
     transition: transform 0.1s ease-in-out;
@@ -270,7 +271,7 @@
 }
 
 .step-number {
-    color: #161616;
+ 
     width: 50px;
     height: 50px;
     border: 2px solid #FF5A5F;
@@ -357,7 +358,7 @@
 .footerSection h4 {
     margin-bottom: 20px;
     font-size: 16px;
-    color: #161616;
+    
 }
 
 .footerLink {
@@ -369,7 +370,7 @@
 }
 
 .footerLink:hover {
-    color: #ff8c38;
+    color: #FF5A5F;
 }
 
 .social-icon {
@@ -421,7 +422,7 @@
 }
 
 .socialLink:hover {
-    color: #ff8c38;
+    color: #FF5A5F;
 }
 
 .footerInfo {
@@ -438,8 +439,8 @@
   width: 100%;
   display: grid;
   gap:10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid with a minimum width */
- /* Space between cards */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
 }
 
 /* Listing Link */
@@ -453,8 +454,30 @@
   flex-direction: column;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #fff; /* Add a background color for better visibility */
+   /* Add a background color for better visibility */
   max-width: 100%; /* Ensure it doesn’t overflow the container */
+  position: relative;
+}
+.badge-container {
+  position: absolute;
+  top: 10px;
+  right: 7px;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.badge-available {
+  background-color: rgb(52, 199, 52);
+}
+
+.badge-not-available {
+  background-color: rgb(228, 21, 21);
 }
 
 /* Card Media */
@@ -682,7 +705,7 @@
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 15px;
-  width: 350px;
+  
 }
 
 .unique-review-comment, 
@@ -711,4 +734,104 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.feedback-section {
+  padding: 50px 5px;
+
+  text-align: center;
+}
+
+.feedback-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.feedback-section p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+/****/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+
+/*******/
+.testimonials-section {
+  padding: 10px 15px;
+  background: #f8f8f8; /* Light gray background */
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333; /* Dark gray color */
+}
+
+.testimonials-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+}
+.testimonials-container::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-card {
+  flex: 0 0 auto;
+  width: 300px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.05);
+}
+
+.testimonial-feedback {
+  font-size: 1rem;
+  color: #555; /* Medium gray color */
+}
+
+.testimonial-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222; /* Slightly darker gray */
+  margin-top: 10px;
 }

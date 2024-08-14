@@ -1,58 +1,97 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import FeaturedCard from '../components/FeaturedCard'
-import HowItWorks from '../components/howItWorks'
-import InfinitScroll from '../components/InfinitScroll'
-import FeedbackForm from '../components/FeedBackForm'
-import GetToKnowUs from '../components/GetToKnowUs'
-import svg from '../assets/svv.svg'
-import svg2 from '../assets/svg2.svg'
-import people from "../assets/people.jpeg"
-import Chat from './chat/chat'
-
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../Firebase/Firebase';  // Adjust the path as needed
+import FeaturedCard from '../components/FeaturedCard';
+import HowItWorks from '../components/howItWorks';
+import FeedbackForm from '../components/FeedBackForm';
+import GetToKnowUs from '../components/GetToKnowUs';
+import Testimonials from '../components/Testimonails';
+import FeedbackModal from '../components/FeedBackModal';
+import people from "../assets/girl-smile.jpeg";
+import { FaStar } from 'react-icons/fa'; // Import the star icon from React Icons
 
 export default function Home() {
-  return (
-    <div>
-        <div className="hero">
-            <div className='hero-text'>
-                <h1>Find the perfect <br/> place to stay as a student</h1>
-                <p>Explore top-notch student accommodations with ease.Take virtual tours, and make secure online payments.</p>
-                <Link to="/listings" >Discover Listings</Link>
-            </div>
-            <div className='hero-image'>
-                <img src={people}/>
-            </div>
-        </div>
-       
-        <div className='popular-section'>
-            <p className='styled-text'>Popular picks </p>
-             <FeaturedCard/>
-        </div>
-        <div className="problem-statement-section">
-          <div className="text-container">
-              <h3>Headaches</h3>
-              <p>Finding the perfect student accommodation can be challenging, time-consuming, and stressful.<br/><br/>Students often face issues with inadequate information,<br/>lack of virtual tours, and secure payment options.</p>
-              <h3>Our Solution</h3>
-              <p>We simplify the process with advanced search filters, virtual tours, and secure online payments,<br/> ensuring a seamless experience for students in finding their ideal living space.</p>
-          </div>
-          <div className="video-container">
-            <video controls>
-                <source src="your-video-url.mp4" type="video/mp4"/>
-                Your browser does not support the video tag.
-            </video>
-           </div>
-        </div>
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-        <section className='section'>
-            <HowItWorks/>
-        </section>
-        <div style={{marginBottom:20}}>
-          <section className='section'>
-            <GetToKnowUs/>
-          </section>
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(!!user);
+        });
+
+        // Set a timer to open the modal after 5 minutes (300000 ms)
+        const timer = setTimeout(() => {
+            setIsModalOpen(true);
+        }, 1000);
+
+        return () => {
+            unsubscribe();
+            clearTimeout(timer); // Clear the timer when the component is unmounted
+        };
+    }, []);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    return (
+        <div>
+            <div className="hero">
+                <div className='hero-text'>
+                    <h1>Find the Perfect <br /> place to stay as a student</h1>
+                    <p> Enjoy a seamless experience with our easy-to-use platform, whether you're a student or anyone looking for a new place to call home.</p>
+                    <Link to={isAuthenticated ? "/listings" : "/public-listings"} className="hero-button">
+                        Discover Listings
+                    </Link>
+                </div>
+                <div className='hero-image'>
+                    <img src={people} alt="Happy person" />
+                </div>
+            </div>
+
+            <div className='popular-section'>
+                <p className='styled-text'>
+                    <FaStar /> Featured Favorites
+                </p>
+                <FeaturedCard />
+            </div>
+            
+            <section className='testimonials-section'>
+                <Testimonials />
+            </section>
+
+            <div className="problem-statement-section">
+                <div className="text-container">
+                    <h2>The Challenges</h2>
+                    <p>Searching for the right accommodation can be both overwhelming and frustrating.<br /><br />
+                        Users frequently encounter problems such as insufficient information, absence of virtual tours, and unreliable payment options.</p>
+
+                    <h2>Our Innovative Solution</h2>
+                    <p>We transform the search experience with cutting-edge features like advanced filters, immersive virtual tours, and secure online payment methods.<br /><br />
+                        This ensures a smooth and stress-free process for discovering the perfect place to stay, whether you're a student or a professional.</p>
+                </div>
+            </div>
+
+            <section className='section'>
+                <HowItWorks />
+            </section>
+
+            <section className='section' style={{ marginBottom: 20 }}>
+                <GetToKnowUs />
+            </section>
+
+            {/* Feedback Form at the End of the Page */}
+            <section className='feedback-section'>
+                <h2>We Value Your Feedback!</h2>
+                <p>Tell us what you love, and what we can improve. Your input helps us grow!</p>
+                <FeedbackForm />
+            </section>
+
+            {/* Feedback Modal */}
+            <FeedbackModal isOpen={isModalOpen} onClose={closeModal}>
+                <FeedbackForm />
+            </FeedbackModal>
         </div>
-        <FeedbackForm/>
-    </div>
-  )
+    );
 }

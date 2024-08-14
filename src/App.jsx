@@ -32,8 +32,8 @@ import ManageUsers from './screens/Adminscreens/ManageUsers';
 import FeedBack from './screens/Adminscreens/FeedBack';
 import ProtectedRoute3 from './components/ProtectedRoute3';
 import { UserProvider } from './Firebase/UserContext';
-import Chat from './screens/chat/chat';
-import ContactHostButton from './components/hostButton';
+import PublicListings from './screens/publicListings.';
+import TermsAndConditions from './components/Terms';
 
 
 export default function App() {
@@ -53,13 +53,17 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/public-Listings" element={<PublicListings/>}/>
+          <Route path="/listings/:id" element={<Details />} /> 
+          <Route path="/terms-and-conditions" element={<TermsAndConditions/>} />
 
           <Route element={<ProtectedRoute2 />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/listings" element={<Listings />} />
-            <Route path="/listings/:id" element={<Details />} />   
+              
           </Route>
-
+           
+          
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<Notfound />} />
@@ -92,7 +96,7 @@ export default function App() {
         <ToastContainer
           style={toastStyles}
           position="top-right"
-          autoClose={5000}
+          autoClose={8000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick

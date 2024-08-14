@@ -13,7 +13,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import ContactHostButton from '../../components/hostButton';
 
 export default function Details() {
     const { id } = useParams();
@@ -23,6 +22,7 @@ export default function Details() {
     const [currentUserId, setCurrentUserId] = useState(null);
     const [hostProfilePic, setHostProfilePic] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const isLargeScreen = useMediaQuery({ query: '(min-width: 700px)' });
 
@@ -56,8 +56,10 @@ export default function Details() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setCurrentUserId(user.uid);
+                setIsAuthenticated(true);
             } else {
                 setCurrentUserId(null);
+                setIsAuthenticated(false);
             }
         });
 
@@ -93,7 +95,7 @@ export default function Details() {
 
     return (
         <div className='details-container'>
-            <Link to="/listings">Back to all Listings</Link>
+            {isAuthenticated && <Link to="/listings">Back to all Listings</Link>}
             <div className='details'>
                 <div className='images-container'>
                     {isLargeScreen ? (
