@@ -661,27 +661,78 @@
   display: inline-block;
   padding: 10px 20px;
   font-size: 16px;
-  color: #fff;
-  background-color: #FF5A5F;
+  color: #000; /* Set text color to black for contrast with white background */
+  background-color: #fff; /* Set the background color to white */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-weight: 450;
+  font-family: 'Poppins', sans-serif; /* Use Poppins font */
   margin-top: 5px;
-  font-family: poppins;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Smooth transition for hover effects */
 }
-.star{
-  font-size: 25px;
-  margin: 0;
-  padding: 0;
-}
+
 .unique-form-button:hover {
-  background-color: #c9302c;
+  transform: translateY(-3px); /* Lift the button slightly on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow on hover */
+  background-color: #fc3535; /* Slightly change the background color on hover */
 }
-.unique-form-header{
+
+.unique-review-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 5px 50px;
+  margin-bottom: 1rem;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.unique-review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.unique-review-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.unique-review-username {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.unique-review-timestamp {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.unique-review-rating {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+.unique-review-comment {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.unique-review-delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff2119;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.del {
+  margin-left: 4px;
 }
 
 /*listing of rating  **/
@@ -802,7 +853,7 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 20px; /* Space between cards */
-  padding: 20px;
+  padding: 20px 10px;
 }
 .testimonials-container::-webkit-scrollbar {
   display: none;
@@ -810,7 +861,7 @@
 
 .testimonial-card {
   flex: 0 0 auto;
-  width: 300px;
+  width: 280px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

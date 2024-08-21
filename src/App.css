@@ -12,30 +12,29 @@ body {
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%; /* Prevents iOS from resizing text */
+}
 
 /*Home page styles.........................................home page styles*/
 
+.section-subtitle {
+  font-size: 1.25rem; /* Slightly larger than normal text */
+  color: #8b7171; /* Medium gray for a softer look */
+  text-align: center; /* Center the subtitle text */
+
+  
+}
+
 .styled-text {
-  display: flex;
-  align-items: center;
-  font-size: 1.25rem; /* Adjust size */
-  font-weight: 600; /* Semi-bold */
-  color: #e04348; /* Airbnb red color */
-  margin: 0; /* Remove default margin */
-  padding: 10px 20px; /* Add padding */
-  border: 2px solid #e04348; /* Airbnb red color for border */
-  border-radius: 5px; /* Rounded corners */
-  display: inline-flex; /* Inline flex to align items */
-  align-items: center; /* Center items vertically */
-
-  text-align: center; /* Center text */
-  text-transform: capitalize; /* Capitalize first letters */
+   /* Larger, prominent text */
+  font-weight: bold; /* Make the text bold */
+  color: #333; /* Dark color for visibility */
+  text-align: center; /* Center the main heading */
+  text-transform: uppercase; /* Make the text uppercase for emphasis */
+  letter-spacing: 0.05rem; /* Slightly increase letter spacing */
 }
 
-.styled-text .react-icons {
-  margin-right: 0.5rem; /* Space between icon and text */
-  color: #e04348; /* Airbnb red color for icon */
-}
 
 
 
@@ -470,16 +469,26 @@ body {
 .contactHost {
   text-decoration: none;
   width: 100%;
-  background-color: #FF5A5F;
+  background-color: #fff; /* Set the background color to white */
   border: none;
   padding: 12px;
   border-radius: 7px;
   font-size: 18px;
   margin-top: 10px;
-  font-weight: bold;
-  color: #fff7ed;
-  font-family: poppins;
+  font-weight: 450;
+  font-family: 'Poppins', sans-serif; /* Use Poppins font */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for the hover effect */
 }
+
+.contactHost:hover {
+  transform: translateY(-3px); /* Lift the button slightly on hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Enhance the shadow on hover */
+  background-color: #fc3535; 
+}
+
+
+
 
 .more-info {
   display: flex;
@@ -872,7 +881,7 @@ section a{
 ::-webkit-file-upload-button{
   border:none;
   border-radius: 3px;
-  padding: 3px ;
+  padding: 7px ;
 }
 .container2 {
   padding: 20px;
@@ -1485,9 +1494,7 @@ option {
 .form-section input{
   font-family: poppins;
 }
-.form-section textarea, input:focus{
-  border: 1px solid #ff5a5f;
-}
+
 .fade {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -1546,41 +1553,8 @@ option {
   object-fit: cover;
 }
 
-/***/
 
-.search-bar {
-  position: relative;
-  margin-bottom: 20px;
-}
 
-.search-input {
-  width: 100%;
-  padding: 15px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-.suggestions-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 100%; /* Position below the search input */
-  left: 0;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-top: none;
-  background: #fff;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.suggestion-item {
-  padding: 10px;
-  cursor: pointer;
-}
 
 .suggestion-item:hover {
   background: #f0f0f0;
@@ -1601,14 +1575,14 @@ option {
   background-color: #0056b3;
 }
 .tip {
-  border: 1px solid white;
+  border: 1px solid #ddd;
   border-left: 4px solid #ff5a5f;
   padding: 10px;
   margin: 15px 0;
   border-radius: 4px;
 }
 .tip2 {
-  border: 1px solid white;
+  border: 1px solid #ddd;
   
   border-left: 4px solid #ff5a5f;
   padding: 10px;
@@ -1673,16 +1647,19 @@ option {
 /**********************************************************/
 .modal {
   position: fixed;
-  top: 25%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
   z-index: 1000;
   opacity: 0;
   animation: fadeIn 0.3s forwards;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fade-in {
@@ -1697,79 +1674,106 @@ option {
 
 .modal-content {
   position: relative;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+
+ 
+  width: 100px;
+
 }
 
 .apply-button {
-  margin-top: 10px;
-  padding: 10px 0px;
+  margin-top: 20px;
+  padding: 12px 20px;
   width: 100%;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-family: poppins;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+  background-color: #0056b3;
 }
 
 .close-button {
   position: absolute;
-  top: 0;
+  top: 10px;
   right: 10px;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 24px;
+  color: #333;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
-.lradio{
-  margin-right: 10px;
+
+.close-button:hover {
+  color: #007bff;
+}
+
+.lradio {
+margin-right: 10px;
+
 }
 
 .action-buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .school-selection {
   display: flex;
   overflow-x: auto;
   width: 100%;
-  margin: 20px 0;
+  margin: 10px 0;
+  padding: 0 5px;
 }
+
 .school-selection::-webkit-scrollbar {
   display: none;
 }
 
 .school-button {
-  padding: 10px 20px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  background-color: #f9f9f9;
+  padding: 12px 25px;
+  border-radius: 5px;
+  background-color: #fff; /* White background */
   cursor: pointer;
   white-space: nowrap;
-  border:none;
-  margin-right: 10px;
-  font-family: poppins;
+  border: none;
+  margin: 7px 7px 7px 0px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Smooth transitions */
+}
+
+.school-button:hover {
+  transform: translateY(-3px); /* Slight uplift on hover */
 
 }
 
 .school-button.active {
-  background-color: #ddd;
+ font-weight: 450;
+  color: #ec2930; /* Light grey background when active */
 }
 
+
 .action-button {
-  padding: 10px 15px;
+  padding: 0px 20px;
   border: none;
   background-color: transparent;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
-  border:none;
-  font-family: poppins;
+  border: none;
+  font-family: 'Poppins', sans-serif;
 }
+
 /**************************************************/
 /* TermsAndConditions.css */
 
@@ -1796,13 +1800,10 @@ option {
 .checkbox-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   margin: 10px 0;
 }
 
-.terms-checkbox {
- 
-}
 
 .terms-label {
   font-size: 0.9rem;

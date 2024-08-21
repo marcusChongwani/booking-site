@@ -116,7 +116,7 @@ export default function Listings() {
       <h3>{activeTab === 'sort' ? 'Sort by Price' : activeTab === 'filter' ? 'Filter Listings' : 'Useful Feature'}</h3>
 
       {activeTab === 'sort' && (
-        <div>
+        <div >
           <label className='lradio'>
             <input
               type='radio'

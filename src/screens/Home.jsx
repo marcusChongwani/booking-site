@@ -5,11 +5,10 @@ import { auth } from '../Firebase/Firebase';  // Adjust the path as needed
 import FeaturedCard from '../components/FeaturedCard';
 import HowItWorks from '../components/howItWorks';
 import FeedbackForm from '../components/FeedBackForm';
-import GetToKnowUs from '../components/GetToKnowUs';
-import Testimonials from '../components/Testimonails';
 import FeedbackModal from '../components/FeedBackModal';
 import people from "../assets/girl-smile.jpeg";
-import { FaStar } from 'react-icons/fa'; // Import the star icon from React Icons
+import { FaStar } from 'react-icons/fa'; 
+
 
 export default function Home() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,7 +22,7 @@ export default function Home() {
         // Set a timer to open the modal after 5 minutes (300000 ms)
         const timer = setTimeout(() => {
             setIsModalOpen(true);
-        }, 1000);
+        }, 40000);
 
         return () => {
             unsubscribe();
@@ -51,15 +50,15 @@ export default function Home() {
             </div>
 
             <div className='popular-section'>
-                <p className='styled-text'>
-                    <FaStar /> Featured Favorites
-                </p>
+                <div style={{display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
+                <p className="section-subtitle">Explore the Best Boarding Houses</p>
+               <h2 className="styled-text">Featured Listings</h2>
+                </div>
+          
                 <FeaturedCard />
             </div>
             
-            <section className='testimonials-section'>
-                <Testimonials />
-            </section>
+            
 
             <div className="problem-statement-section">
                 <div className="text-container">
@@ -77,10 +76,7 @@ export default function Home() {
                 <HowItWorks />
             </section>
 
-            <section className='section' style={{ marginBottom: 20 }}>
-                <GetToKnowUs />
-            </section>
-
+           
             {/* Feedback Form at the End of the Page */}
             <section className='feedback-section'>
                 <h2>We Value Your Feedback!</h2>

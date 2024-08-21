@@ -21,8 +21,7 @@ const Create = () => {
     hostNumber: '',
     category: 'Basic',
     information: '',
-    detailsBoys: '',
-    detailsGirls: '',
+    rooms: '',
     amenities: '',
   });
   const [images, setImages] = useState([]);
@@ -170,8 +169,7 @@ const Create = () => {
         hostNumber,
         category,
         information,
-        detailsBoys,
-        detailsGirls,
+        rooms,
         amenities,
       } = formData;
 
@@ -190,8 +188,7 @@ const Create = () => {
         hostNumber,
         category,
         information,
-        detailsBoys: detailsBoys.split(',').map((item) => item.trim()),
-        detailsGirls: detailsGirls.split(',').map((item) => item.trim()),
+        rooms: rooms.split(',').map((item) => item.trim()),
         amenities: amenities.split(',').map((item) => item.trim()),
         images: imageUrls,
       });
@@ -207,8 +204,7 @@ const Create = () => {
         hostNumber: '',
         category: 'Basic',
         information: '',
-        detailsBoys: '',
-        detailsGirls: '',
+        rooms: '',
         amenities: '',
       });
       setImages([]);
@@ -244,300 +240,257 @@ const Create = () => {
 
   return (
     <div className="container2">
-  <h3>Create a New Listing</h3>
-  <div className="progress-bar">
-    <div style={{ width: `${(currentStep / 5) * 100}%` }}></div>
-  </div>
-  <form className={`listing-form ${currentStep}`} onSubmit={handleSubmit}>
-    {/* Step 1 */}
-    {currentStep === 1 && (
-      <div className={`fade ${fade ? 'fade-active' : ''}`}>
-        <div className="form-section">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Enter the name of the place"
-            required
-            disabled={isLoading}
-          />
-          {errors.name && <p className="error-text">{errors.name}</p>}
-
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="information"
-            value={formData.information}
-            onChange={handleInputChange}
-            placeholder="Describe your listing in detail"
-            required
-            rows="4"
-            disabled={isLoading}
-          />
-          {errors.information && <p className="error-text">{errors.information}</p>}
-
-          <label htmlFor="school">Select School</label>
-          <select
-            id="school"
-            name="school"
-            value={formData.school}
-            onChange={handleInputChange}
-            required
-            disabled={isLoading}
-          >
-            <option value="">--Select School--</option>
-            {schools.map((school) => (
-              <option key={school.abbreviation} value={school.name}>
-                {school.abbreviation}
-              </option>
-            ))}
-          </select>
-          {errors.school && <p className="error-text">{errors.school}</p>}
-
-          <label htmlFor="price">Price</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-            placeholder="Enter the price"
-            required
-            disabled={isLoading}
-          />
-
-          <label htmlFor="gender">Gender Specification</label>
-          <select
-            id="gender"
-            name="gender"
-            value={formData.gender}
-            onChange={handleInputChange}
-            required
-            disabled={isLoading}
-          >
-            <option value="">--Select Gender--</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Both">Both</option>
-          </select>
-          {errors.gender && <p className="error-text">{errors.gender}</p>}
-        </div>
-        <p className="tip">
-          A great title and detailed description can make your listing stand out. <br />
-          Use high-quality images to attract more viewers.
-        </p>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(2)}
-          className="next-button"
-          disabled={isLoading}
-        >
-          Next
-        </button>
+      <h3>Create a New Listing</h3>
+      <div className="progress-bar">
+        <div style={{ width: `${(currentStep / 5) * 100}%` }}></div>
       </div>
-    )}
+      <form className={`listing-form ${currentStep}`} onSubmit={handleSubmit}>
+        {/* Step 1 */}
+        {currentStep === 1 && (
+          <div className={`fade ${fade ? 'fade-active' : ''}`}>
+            <div className="form-section">
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="Enter the name of the place"
+                required
+                disabled={isLoading}
+              />
+              {errors.name && <p className="error-text">{errors.name}</p>}
 
-    {/* Step 2 */}
-    {currentStep === 2 && (
-      <div className={`fade ${fade ? 'fade-active' : ''}`}>
-        <div className="form-section">
-          <label htmlFor="images">Upload Images (5-10)</label>
-          <input
-            type="file"
-            id="images"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
-            disabled={isLoading}
-            className="image-upload"
-          />
-          {errors.images && <p className="error-text">{errors.images}</p>}
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleInputChange}
-            placeholder="Enter the location"
-            required
-            disabled={isLoading}
-          />
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="information"
+                value={formData.information}
+                onChange={handleInputChange}
+                placeholder="Describe your listing in detail"
+                required
+                rows="4"
+                disabled={isLoading}
+              />
+              {errors.information && <p className="error-text">{errors.information}</p>}
 
-          <label htmlFor="time">Walking Time (minutes)</label>
-          <input
-            type="number"
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleInputChange}
-            placeholder="Enter the walking time to school"
-            required
-            disabled={isLoading}
-          />
-          {errors.time && <p className="error-text">{errors.time}</p>}
+              <label htmlFor="school">Select School</label>
+              <select
+                id="school"
+                name="school"
+                value={formData.school}
+                onChange={handleInputChange}
+                required
+                disabled={isLoading}
+              >
+                <option value="">--Select School--</option>
+                {schools.map((school) => (
+                  <option key={school.abbreviation} value={school.name}>
+                    {school.abbreviation}
+                  </option>
+                ))}
+              </select>
+              {errors.school && <p className="error-text">{errors.school}</p>}
 
+              <label htmlFor="walking-time">Walking Time</label>
+              <input
+                type="text"
+                id="walking-time"
+                name="time"
+                value={formData.time}
+                onChange={handleInputChange}
+                placeholder="Enter walking time in minutes"
+                required
+                disabled={isLoading}
+              />
+              {errors.time && <p className="error-text">{errors.time}</p>}
+            </div>
+          </div>
+        )}
+
+        {/* Step 2 */}
+        {currentStep === 2 && (
+          <div className={`fade ${fade ? 'fade-active' : ''}`}>
+            <div className="form-section">
+              <label htmlFor="gender">Gender Preference</label>
+              <select
+                id="gender"
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+                required
+                disabled={isLoading}
+              >
+                <option value="">--Select Gender--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="any">Male & Female</option>
+              </select>
+              {errors.gender && <p className="error-text">{errors.gender}</p>}
+
+              <label htmlFor="price">Price</label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
+                placeholder="Enter the price per month"
+                required
+                disabled={isLoading}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Step 3 */}
+        {currentStep === 3 && (
+          <div className={`fade ${fade ? 'fade-active' : ''}`}>
+            <div className="form-section">
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
+                required
+                disabled={isLoading}
+              >
+                <option value="Basic">Basic</option>
+                <option value="Premium">Premium</option>
+                <option value="Luxury">Luxury</option>
+              </select>
+
+              <label htmlFor="rooms">Rooms</label>
+              <input
+                type="text"
+                id="rooms"
+                name="rooms"
+                value={formData.rooms}
+                onChange={handleInputChange}
+                placeholder="Enter room details separated by commas"
+                disabled={isLoading}
+              />
+
+              <label htmlFor="hostName">Host Name</label>
+              <input
+                type="text"
+                id="hostName"
+                name="hostName"
+                value={formData.hostName}
+                onChange={handleInputChange}
+                placeholder="Enter host's name"
+                required
+                disabled={isLoading}
+              />
+
+              <label htmlFor="hostNumber">Host Phone Number</label>
+              <input
+                type="text"
+                id="hostNumber"
+                name="hostNumber"
+                value={formData.hostNumber}
+                onChange={handleInputChange}
+                placeholder="Enter host's phone number"
+                required
+                disabled={isLoading}
+              />
+          
+            </div>
+          </div>
+        )}
+
+        {/* Step 4 */}
+        {currentStep === 4 && (
+          <div className={`fade ${fade ? 'fade-active' : ''}`}>
+            <div className="form-section">
+              <label htmlFor="images">Upload Images</label>
+              <input
+                type="file"
+                id="images"
+                name="images"
+                onChange={handleImageChange}
+                accept="image/*"
+                multiple
+                disabled={isLoading}
+              />
+              {images.length > 0 && <p>{images.length} images selected</p>}
+              <p>Please upload between 5 and 10 images.</p>
+            </div>
+            <div className="form-section">
+              <label htmlFor="amenities">Amenities</label>
+              <input
+                type="text"
+                id="amenities"
+                name="amenities"
+                value={formData.amenities}
+                onChange={handleInputChange}
+                placeholder="Enter amenities separated by commas"
+                disabled={isLoading}
+              />
+              {errors.amenities && <p className="error-text">{errors.amenities}</p>}
+
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleInputChange}
+                placeholder="Enter the location of the listing"
+                disabled={isLoading}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Step 5 */}
+        {currentStep === 5 && (
+          <div className={`fade ${fade ? 'fade-active' : ''}`}>
+            {currentStep ==5 && getPreviewData()}
+          </div>
+        )}
+
+        {/* Step Navigation */}
+        <div className="form-navigation">
+          {currentStep > 1 && (
+            <button
+              type="button"
+              className="back-button"
+              onClick={() => {
+                setCurrentStep((prev) => prev - 1);
+                setFade(false);
+              }}
+              disabled={isLoading}
+            >
+              Back
+            </button>
+          )}
+          {currentStep < 5 && (
+            <button
+              type="button"
+              className="next-button"
+              onClick={() => {
+                setCurrentStep((prev) => prev + 1);
+                setFade(false);
+              }}
+              disabled={isLoading}
+            >
+              Next
+            </button>
+          )}
+          {currentStep === 5 && (
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Submitting...' : 'Submit'}
+            </button>
+          )}
         </div>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(1)}
-          className="back-button"
-          disabled={isLoading}
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(3)}
-          className="next-button"
-          disabled={isLoading}
-        >
-          Next
-        </button>
-      </div>
-    )}
+      </form>
 
-    {/* Step 3 */}
-    {currentStep === 3 && (
-      <div className={`fade ${fade ? 'fade-active' : ''}`}>
-        <div className="form-section">
-          <label htmlFor="detailsBoys">Details for Boys</label>
-          <textarea
-            id="detailsBoys"
-            name="detailsBoys"
-            value={formData.detailsBoys}
-            onChange={handleInputChange}
-            placeholder="Enter details for boys"
-            rows="4"
-            disabled={isLoading}
-          />
-
-          <label htmlFor="detailsGirls">Details for Girls</label>
-          <textarea
-            id="detailsGirls"
-            name="detailsGirls"
-            value={formData.detailsGirls}
-            onChange={handleInputChange}
-            placeholder="Enter details for girls"
-            rows="4"
-            disabled={isLoading}
-          />
-
-          <label htmlFor="amenities">Amenities</label>
-          <textarea
-            id="amenities"
-            name="amenities"
-            value={formData.amenities}
-            onChange={handleInputChange}
-            placeholder="List the amenities"
-            rows="4"
-            required
-            disabled={isLoading}
-          />
-          {errors.amenities && <p className="error-text">{errors.amenities}</p>}
-        </div>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(2)}
-          className="back-button"
-          disabled={isLoading}
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(4)}
-          className="next-button"
-          disabled={isLoading}
-        >
-          Next
-        </button>
-      </div>
-    )}
-
-    {/* Step 4 */}
-    {currentStep === 4 && (
-      <div className={`fade ${fade ? 'fade-active' : ''}`}>
-        <div className="form-section">
-          <label htmlFor="category">Category</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleInputChange}
-            disabled={isLoading}
-          >
-            <option value="Basic">Basic</option>
-            <option value="Premium">Premium</option>
-            <option value="Luxury">Luxury</option>
-          </select>
-
-          <label htmlFor="hostName">Host Name</label>
-          <input
-            type="text"
-            id="hostName"
-            name="hostName"
-            value={formData.hostName}
-            onChange={handleInputChange}
-            placeholder="Host Name"
-            required
-            disabled={isLoading}
-          />
-
-          <label htmlFor="hostNumber">Host Phone Number</label>
-          <input
-            type="tel"
-            id="hostNumber"
-            name="hostNumber"
-            value={formData.hostNumber}
-            onChange={handleInputChange}
-            placeholder="Host Phone Number"
-            required
-            disabled={isLoading}
-          />
-        </div>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(3)}
-          className="back-button"
-          disabled={isLoading}
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentStep(5)}
-          className="next-button"
-          disabled={isLoading}
-        >
-          Next
-        </button>
-      </div>
-    )}
-
-    {/* Step 5: Preview */}
-    {currentStep === 5 && (
-      <>
-        <div className="preview-section">
-          {getPreviewData()}
-        </div>
-        <button
-          type="submit"
-          className="submit-button"
-          disabled={isLoading}
-        >
-          Submit
-        </button>
-      </>
-    )}
-
-  </form>
-  {isLoading && <p className="loading-text">Submitting...</p>}
-</div>
-
+      {/* Preview Section */}
+     
+    </div>
   );
 };
 

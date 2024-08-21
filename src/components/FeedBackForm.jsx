@@ -32,20 +32,12 @@ const FeedbackForm = () => {
 
   return (
     <form className="feedback-form" onSubmit={handleSubmit}>
-      <h2 className="feedback-form-title">Leave Us A </h2>
+      <h2 className="feedback-form-title">Leave Us a Review :) </h2>
       <input 
         type="text" 
         placeholder="Your Name" 
         value={name} 
         onChange={(e) => setName(e.target.value)} 
-        className="feedback-input" 
-        required 
-      />
-      <input 
-        type="text" 
-        placeholder="Your Phone Number" 
-        value={number} 
-        onChange={(e) => setNumber(e.target.value)} 
         className="feedback-input" 
         required 
       />

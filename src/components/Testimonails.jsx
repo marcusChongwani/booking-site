@@ -5,6 +5,7 @@ import './Components.css'; // Make sure this file contains the necessary styles
 
 const Testimonials = () => {
     const [testimonials, setTestimonials] = useState([]);
+    const [scrollDirection, setScrollDirection] = useState('right');
 
     useEffect(() => {
         const fetchTestimonials = async () => {
@@ -24,21 +25,33 @@ const Testimonials = () => {
         const container = document.querySelector('.testimonials-container');
         if (!container || testimonials.length === 0) return;
 
-        const scrollInterval = 3000; // Time in ms between scrolls
+        const scrollInterval = 1300; // Time in ms between scrolls
         const scrollAmount = container.scrollWidth / testimonials.length;
-
+        
         const scroll = () => {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            if (scrollDirection === 'right') {
+                if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+                    setScrollDirection('left'); // Change direction to left
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            } else {
+                if (container.scrollLeft <= 0) {
+                    setScrollDirection('right'); // Change direction to right
+                } else {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+            }
         };
 
         const interval = setInterval(scroll, scrollInterval);
 
         return () => clearInterval(interval);
-    }, [testimonials]);
+    }, [testimonials, scrollDirection]);
 
     return (
         <div className="testimonials-section">
-            <h2>What Our Users Say</h2>
+            <h2>What Our Users Say 😁</h2>
             <div className="testimonials-container">
                 {testimonials.map((testimonial, index) => (
                     <div key={index} className="testimonial-card">

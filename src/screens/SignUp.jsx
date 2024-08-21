@@ -146,7 +146,7 @@ export default function SignUp() {
                   required
                   disabled={isLoading}
                 />
-                <span className='inn'>User</span>
+                <div className='inn'>User</div>
               </label>
             </div>
             <div className='radio'> 
@@ -160,7 +160,7 @@ export default function SignUp() {
                   required
                   disabled={isLoading}
                 />
-                <span className='inn'>Host</span>
+                <div className='inn'>Host</div>
               </label>
             </div>
           </div>

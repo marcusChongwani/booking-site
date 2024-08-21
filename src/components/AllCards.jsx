@@ -65,7 +65,7 @@ export default function AllCards({ listings }) {
               </div>
               <div className='listing-info'>
                 <p className="school">{item.school}</p>
-                <p className="time">{item.time}</p>
+                <p className="time">{item.time} minutes walk</p>
               </div>
               <p className="gender">{item.gender}</p>
             </div>

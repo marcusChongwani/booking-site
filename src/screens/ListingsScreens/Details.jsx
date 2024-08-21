@@ -90,8 +90,8 @@ export default function Details() {
         return <div>No house data found.</div>;
     }
 
-    const filteredDetailsBoys = house.detailsBoys.filter(room => room.trim() !== '');
-    const filteredDetailsGirls = house.detailsGirls.filter(room => room.trim() !== '');
+   
+  
 
     return (
         <div className='details-container'>
@@ -159,23 +159,18 @@ export default function Details() {
                                 ))}
                             </ul>
                         </div>
-                        <div className='more-info'>
-                            {filteredDetailsBoys.length > 0 && (
+                        <div className=''>
+                            {house.rooms.length > 0 && (
                                 <div>
-                                    <h4>Male rooms</h4>
-                                    {filteredDetailsBoys.map((room, index) => (
-                                        <p key={index}>{room}</p>
+                                    <h4 className='offers-header'>Room information</h4>
+                                    <div className='offers'>
+                                    {house.rooms.map((room, index) => (
+                                        <li key={index}>{room}</li>
                                     ))}
+                                    </div>
                                 </div>
                             )}
-                            {filteredDetailsGirls.length > 0 && (
-                                <div>
-                                    <h4>Female rooms</h4>
-                                    {filteredDetailsGirls.map((room, index) => (
-                                        <p key={index}>{room}</p>
-                                    ))}
-                                </div>
-                            )}
+                           
                         </div>
                         <button className='contactHost' onClick={() => handleTextHost(house.hostNumber, house.hostName)}>Contact Host</button>
                     </div>
